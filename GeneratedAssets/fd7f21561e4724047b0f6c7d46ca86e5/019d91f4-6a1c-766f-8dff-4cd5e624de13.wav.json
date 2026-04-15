@@ -1,0 +1,14 @@
+{
+    "asset": "fd7f21561e4724047b0f6c7d46ca86e5",
+    "fileName": "019d91f4-6a1c-766f-8dff-4cd5e624de13.wav",
+    "prompt": "Short game sound effect of a character hitting an obstacle and falling to the ground, with a clear impact followed by a quick body drop, stylized and slightly cartoony, not too realistic, suitable for a 3D endless runner game.",
+    "negativePrompt": "",
+    "model": "5de0686a-fb27-40e5-9df0-28ae810d70ca",
+    "modelName": "ElevenLabs Sound Effects V2",
+    "customSeed": -1,
+    "w3CTraceId": "ced1bdd8289a7dc8e38ac457aa25fd6c",
+    "feedback": 0,
+    "duration": 2.0,
+    "autoTrim": false,
+    "hasReference": false
+}
