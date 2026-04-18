@@ -17,8 +17,23 @@ public class MainMenuControl : MonoBehaviour
     [SerializeField] GameObject staticCam;
     [SerializeField] GameObject fadeIn;
 
+    [SerializeField] int loadedCoins;
+    [SerializeField] int loadedKeys;
+    [SerializeField] int loadedDistance;
+    [SerializeField] GameObject coinDisplay;
+    [SerializeField] GameObject keyDisplay;
+    [SerializeField] GameObject distanceDisplay;
+    
+
     void Start()
     {
+        //loadedCoins = PlayerPrefs.GetInt("COINSAVE");
+        //loadedKeys = PlayerPrefs.GetInt("KEYSAVE");
+        //loadedDistance = PlayerPrefs.GetInt("DISTANCESAVE");
+        //coinDisplay.GetComponent<TMPro.TMP_Text>().text = "" + coinCount;
+        //keyDisplay.GetComponent<TMPro.TMP_Text>().text = "" + keyCount;
+        //runDisplay.GetComponent<TMPro.TMP_Text>().text = "" + distanceRun;
+
         StartCoroutine(FadeInTurnOff());
         if(hasClicked == true)
         {
@@ -33,8 +48,8 @@ public class MainMenuControl : MonoBehaviour
     }
 
     void Update()
-    {
-        
+    {  
+    
     }
 
 
@@ -71,6 +86,13 @@ public class MainMenuControl : MonoBehaviour
 
     IEnumerator FadeInTurnOff()
     {
+        yield return new WaitForSeconds(0.05f);
+        loadedCoins = PlayerPrefs.GetInt("COINSAVE");
+        loadedKeys = PlayerPrefs.GetInt("KEYSAVE");
+        loadedDistance = PlayerPrefs.GetInt("DISTANCESAVE");
+        coinDisplay.GetComponent<TMPro.TMP_Text>().text = "" + MasterInfo.coinCount;
+        keyDisplay.GetComponent<TMPro.TMP_Text>().text = "" + MasterInfo.keyCount;
+        distanceDisplay.GetComponent<TMPro.TMP_Text>().text = "" + MasterInfo.distanceRun;
         yield return new WaitForSeconds(1);
         fadeIn.SetActive(false);
     }
