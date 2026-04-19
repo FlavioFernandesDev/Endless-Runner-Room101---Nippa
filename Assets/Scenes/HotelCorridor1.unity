@@ -15746,8 +15746,8 @@ MonoBehaviour:
   - {fileID: 928834068}
   - {fileID: 1232872091}
   - {fileID: 343707880}
+  player: {fileID: 309765501}
   zPos: 30
-  creatingSegment: 0
   segmentNum: 0
 --- !u!4 &1318841905
 Transform:
