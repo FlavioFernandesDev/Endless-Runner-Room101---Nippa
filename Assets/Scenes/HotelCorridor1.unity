@@ -525,6 +525,8 @@ MonoBehaviour:
   acceleration: 0.2
   horizontalSpeed: 3
   jumpForce: 5
+  minX: -2
+  maxX: 1.7
   isRunning: 0
   isGrounded: 0
   isDead: 0
@@ -3162,6 +3164,22 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 1830489259504030185, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_Size.x
+      value: 0.0080773
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830489259504030185, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_Center.x
+      value: 0.00046534685
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830489259504030185, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_Center.y
+      value: 0.000007505119
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830489259504030185, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_Center.z
+      value: -0.000009710193
+      objectReference: {fileID: 0}
     - target: {fileID: 2104510371250434200, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: fadeOut
       value: 
