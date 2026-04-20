@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public float acceleration = 0.1f;  // Quanto aumenta por segundo (novo!)
     public float horizontalSpeed = 3;
     public float jumpForce = 3;        // Baixei para 3 para o teto!
+    public float minX = -2;           // Limite esquerdo
+    public float maxX = -0.1f;            // Limite direito
     
     [SerializeField] bool isRunning;
     [SerializeField] bool isGrounded;
@@ -71,6 +73,10 @@ public class PlayerMovement : MonoBehaviour
                 transform.Translate(Vector3.right * horizontalSpeed * Time.deltaTime);
             }
         }
+
+        Vector3 clampedPosition = transform.position;
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, minX, maxX);
+        transform.position = clampedPosition;
 
         // O laser que deteta o chão
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.2f);
