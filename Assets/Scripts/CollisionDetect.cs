@@ -30,5 +30,4 @@ public class CollisionDetect : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-
 }

@@ -2134,7 +2134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continuar
+  m_text: CONTINUAR
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3325,7 +3325,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sair
+  m_text: SAIR
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3869,6 +3869,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 85740575538629919, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 221709059969528984, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 318015851430131195, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 376387129949287235, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: fadeOut
       value: 
@@ -3913,6 +3925,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 873589671497304571, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 985029050406904494, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: fadeOut
       value: 
@@ -3933,6 +3949,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 1271279609513826544, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1343910731134162003, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: coinFx
       value: 
@@ -3961,6 +3981,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 1572686586121106563, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1672739847375923818, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: coinFx
       value: 
@@ -3985,6 +4009,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.000009710193
       objectReference: {fileID: 0}
+    - target: {fileID: 1870148407999948664, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 2104510371250434200, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4085,6 +4113,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 2637681796167913454, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 2728026741643448964, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4109,6 +4141,14 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 2987948692918800800, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3623060794951200387, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 3769913151645821219, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4133,6 +4173,22 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 4025833235443760479, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4486620787113136892, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4510013192871296828, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4538924455869887413, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 4712337630486771787, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4213,10 +4269,26 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 5454399112708301265, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5540283579011043071, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 5706544079880274994, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782326708193735214, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5989674877111944700, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 6091987267747967686, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: coinFx
       value: 
@@ -4309,10 +4381,54 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 6466988478166400870, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599877217157431052, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836958239451305641, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6898166735244829225, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7132361875620339567, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7160974178649766593, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7629384478905329105, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7719335136206480248, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 7723385551864223119, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 7726533735133343446, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7889104565761014517, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096542892808146430, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 8140929453609919959, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4333,6 +4449,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 8196240979277003627, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 8228683052218224825, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4353,10 +4473,26 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 8380918051118875037, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 8785995804160709630, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 8923836661766263628, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 9027024897096183561, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076097723428276788, guid: fb361bb3de6377d4e847b72b156107ea, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4394,6 +4530,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 610114072907772359, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 717932588228482285, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4418,6 +4558,34 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 837245840407686470, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 871210923163315541, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 990277231512855421, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055648741533571634, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186866533165614348, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1208290229151079926, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339263621207876564, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1672892059873902280, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4438,6 +4606,14 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 1698796368782116958, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1863305613127498761, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1869197212182927862, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4458,6 +4634,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 2075291940844303483, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 2135050499227746433, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4478,6 +4658,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 2181257653113129765, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 2269656707506059097, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4502,10 +4686,26 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 2424425978223943059, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2523141514497793207, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 2605117102554719700, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 2681940212437881679, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3032416316049467437, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 3044418757123213218, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4546,6 +4746,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 3460767733296734296, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 3464577337651132816, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: coinFx
       value: 
@@ -4594,6 +4798,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3795744543668004881, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 3897826740874330491, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4654,6 +4862,34 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 4287718750540400662, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380224092449962535, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4540660922329543261, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4555051087355127137, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752510598572230986, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4781592873732331266, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005138920666571176, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5033885361502448930, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4674,6 +4910,18 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 5241508601218110664, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5292982016554455438, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5658240340575689709, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5757635993608554106, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: coinFx
       value: 
@@ -4710,6 +4958,18 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 1122549564}
+    - target: {fileID: 6468277635225230304, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6550717603271188481, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785622182606453954, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 6930445579802045946, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4730,6 +4990,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 7010096944241808700, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 7182250413361585015, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4750,6 +5014,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 7192946606142034252, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 7510346012404668991, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4814,6 +5082,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 8066492542992507670, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 8236098630592100717, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4866,6 +5138,10 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 8896478344488867050, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 9041338753465069611, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4886,6 +5162,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 9118501114587504601, guid: a9d17c2b5b06c5341bbb2135b8eb437b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4903,6 +5183,10 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 212958243979091193, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 222779674042274340, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4951,6 +5235,14 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 1344153363863385729, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1380546461983314526, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1466680352419102601, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: fadeOut
       value: 
@@ -4971,6 +5263,14 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 1683748312849754494, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720700798040466960, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1745983480107436784, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5035,6 +5335,10 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 2471123781791849508, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 2592215536488304816, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: coinFx
       value: 
@@ -5063,6 +5367,10 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 2804318145849189381, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 3022519416837163566, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5083,6 +5391,22 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 3365393952079726824, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3409598599900007674, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3690737383528898023, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3764781737785951831, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 3799050758981304911, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5107,6 +5431,14 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 3893564023745435989, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4107251151996062764, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 4148400189009261362, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5147,10 +5479,22 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 4444617589544151449, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 4598046236331625547, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 4606396804367453856, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680610560609351353, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 4744259016547566437, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5171,6 +5515,14 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 4797083181119520885, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813154403018660488, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 4816524731063346455, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5231,6 +5583,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 5060009812397152390, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5267539388476442945, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5271,6 +5627,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 5449640972263906061, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5695413800805290725, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5291,6 +5651,30 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 5718379613925446066, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849073536923273402, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179086263484604795, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6225566126504208966, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6259355310935123456, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6416315625263159665, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 6488454960190237432, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: m_Name
       value: Segment (1)
@@ -5319,6 +5703,18 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 7445535564329339999, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458740851210734900, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572299632895765660, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 7703944661462110485, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: coinFx
       value: 
@@ -5367,10 +5763,34 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 8008716291006012862, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8402612150393441161, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8454786749137735282, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 8552928355845437486, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 8752996494364025249, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8820748131629460249, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8862151849745038578, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 9011538188450368001, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5411,6 +5831,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 9191682732700120203, guid: d68b961abe2f8d347b87bf7ee14dfe8e, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5424,6 +5848,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 76323996267944463, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 103094794019700244, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5444,6 +5872,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 425179186203543515, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 586095055349063644, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5464,6 +5896,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 1088996390100275051, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1120555798754375754, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5488,6 +5924,10 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 1305604981817122984, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1381654658159928784, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5508,6 +5948,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 1397641209745461163, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1554873074281034907, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5528,6 +5972,14 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 1719423530021704651, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781090542789002977, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 1885197683114928424, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5568,6 +6020,18 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 1998825775655175461, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2102910903329919668, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285749064724239106, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 2368151677963974120, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5608,6 +6072,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 2455440538053554555, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 2772558474235202311, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: coinFx
       value: 
@@ -5632,6 +6100,26 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 3070436009097961332, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140592090671944590, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282046280051162858, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3592875773210576621, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3638826349118027752, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 3844210093247329303, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: m_Name
       value: Segment (2)
@@ -5640,6 +6128,14 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 4034168007287113426, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4294856665959638019, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 4303668306855112334, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: coinFx
       value: 
@@ -5668,6 +6164,10 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 4527215599737388616, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 4537303682373164022, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: coinFx
       value: 
@@ -5696,6 +6196,10 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 5137111328023099073, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 5170572230757495170, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5776,6 +6280,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5321819083944149088, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5454621726098812998, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5555368562926167622, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5761915657573858450, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947855734396467526, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 6020175147783203732, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5820,6 +6344,22 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 6397261743431757361, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6928449235448806898, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161119500885760920, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7325531391633947688, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 7413082354998454857, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5840,10 +6380,34 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 7544276373625881034, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576467180725981269, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713377370728741765, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721984336431071580, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 7772953820591526550, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 7863655216899079001, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112414185394655100, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 8284265960130818966, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5868,6 +6432,14 @@ PrefabInstance:
       propertyPath: coinFx
       value: 
       objectReference: {fileID: 744362134}
+    - target: {fileID: 8494724890614457974, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8528210100714919075, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 8550626845567391114, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 
@@ -5956,6 +6528,10 @@ PrefabInstance:
       propertyPath: collisionFx
       value: 
       objectReference: {fileID: 1819330236}
+    - target: {fileID: 9136155325780233927, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 9190582233118087326, guid: cf729ef90e0cb0c4985bc2e6c4d61215, type: 3}
       propertyPath: fadeOut
       value: 

@@ -27,13 +27,6 @@ public class MainMenuControl : MonoBehaviour
 
     void Start()
     {
-        //loadedCoins = PlayerPrefs.GetInt("COINSAVE");
-        //loadedKeys = PlayerPrefs.GetInt("KEYSAVE");
-        //loadedDistance = PlayerPrefs.GetInt("DISTANCESAVE");
-        //coinDisplay.GetComponent<TMPro.TMP_Text>().text = "" + coinCount;
-        //keyDisplay.GetComponent<TMPro.TMP_Text>().text = "" + keyCount;
-        //runDisplay.GetComponent<TMPro.TMP_Text>().text = "" + distanceRun;
-
         StartCoroutine(FadeInTurnOff());
         if(hasClicked == true)
         {
@@ -42,16 +35,8 @@ public class MainMenuControl : MonoBehaviour
             menuControls.SetActive(true);
             bounceText.SetActive(false);
             bigButton.SetActive(false);
-            
-        
         }
     }
-
-    void Update()
-    {  
-    
-    }
-
 
     public void MenuBeginButton()
     {
@@ -95,5 +80,14 @@ public class MainMenuControl : MonoBehaviour
         distanceDisplay.GetComponent<TMPro.TMP_Text>().text = "" + MasterInfo.distanceRun;
         yield return new WaitForSeconds(1);
         fadeIn.SetActive(false);
+    }
+
+    
+    public void SairParaSelectStage()
+    {
+        // Garante que o tempo está normal 
+        Time.timeScale = 1f;
+        // Carrega a cena de seleção de níveis
+        SceneManager.LoadScene("StageSelect");
     }
 }
