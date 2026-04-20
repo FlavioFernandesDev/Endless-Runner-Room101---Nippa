@@ -13362,7 +13362,7 @@ GameObject:
   - component: {fileID: 1287038112}
   - component: {fileID: 1287038111}
   m_Layer: 0
-  m_Name: Sair
+  m_Name: "Bot\xE3oSair"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16733,7 +16733,7 @@ GameObject:
   - component: {fileID: 1582485856}
   - component: {fileID: 1582485855}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Sair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
