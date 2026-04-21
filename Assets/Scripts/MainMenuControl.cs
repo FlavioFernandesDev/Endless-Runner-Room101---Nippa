@@ -57,6 +57,7 @@ public class MainMenuControl : MonoBehaviour
 
     public void StartGame()
     {
+        
         saltarIntro = false; // Reset para quando começar a jogar
         SceneManager.LoadScene("StageSelect"); 
     }

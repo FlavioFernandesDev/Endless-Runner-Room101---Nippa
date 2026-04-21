@@ -20132,6 +20132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2003881823}
   - component: {fileID: 2003881822}
+  - component: {fileID: 2003881824}
   m_Layer: 5
   m_Name: _PauseManager
   m_TagString: Untagged
@@ -20172,6 +20173,20 @@ RectTransform:
   m_AnchoredPosition: {x: 1080.6047, y: 479.73145}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2003881824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003881821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ab9679633fbef24eaf84b51f0e603d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrocaCamara
+  cameraLonge: {fileID: 1530689195}
+  cameraPerto: {fileID: 818733509}
 --- !u!1 &2010326399
 GameObject:
   m_ObjectHideFlags: 0

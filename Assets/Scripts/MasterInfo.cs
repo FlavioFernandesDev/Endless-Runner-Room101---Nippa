@@ -14,10 +14,10 @@ public class MasterInfo : MonoBehaviour
 
     void Start ()
     {
-       coinCount = 0;
-       keyCount = 0;
-       distanceRun = 0; 
+      
     }
+        
+  
 
     void Update()
     {
