@@ -530,8 +530,6 @@ MonoBehaviour:
   isRunning: 0
   isGrounded: 0
   isDead: 0
-  _animator: {fileID: 1821384673}
-  painelBotoesMenu: {fileID: 0}
 --- !u!114 &309765503
 MonoBehaviour:
   m_ObjectHideFlags: 0
