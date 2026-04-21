@@ -962,7 +962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 323534199}
-  - component: {fileID: 323534198}
+  - component: {fileID: 323534200}
   m_Layer: 5
   m_Name: _PauseManager
   m_TagString: Untagged
@@ -970,19 +970,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &323534198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323534197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f656b0648464bad46b4d31ff2a2e44a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseManager
-  pauseMenuUI: {fileID: 0}
 --- !u!224 &323534199
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1002,6 +989,33 @@ RectTransform:
   m_AnchoredPosition: {x: 1080.6047, y: 479.73145}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &323534200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323534197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21fde783279c14f7cb72b2b8b3ff99f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuControl
+  fadeOut: {fileID: 0}
+  bounceText: {fileID: 0}
+  bigButton: {fileID: 0}
+  animCam: {fileID: 0}
+  mainCam: {fileID: 0}
+  menuControls: {fileID: 0}
+  buttonSelect: {fileID: 0}
+  staticCam: {fileID: 0}
+  fadeIn: {fileID: 0}
+  loadedCoins: 0
+  loadedKeys: 0
+  loadedDistance: 0
+  coinDisplay: {fileID: 0}
+  keyDisplay: {fileID: 0}
+  distanceDisplay: {fileID: 0}
 --- !u!4 &344282347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d328fbd4a08ba4851befb42e554a232d, type: 3}
@@ -1851,9 +1865,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 323534198}
-        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
-        m_MethodName: SairDoJogo
+      - m_Target: {fileID: 323534200}
+        m_TargetAssemblyTypeName: MainMenuControl, Assembly-CSharp
+        m_MethodName: VoltarParaStartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

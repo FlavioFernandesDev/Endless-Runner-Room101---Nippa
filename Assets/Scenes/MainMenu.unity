@@ -6649,21 +6649,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fde783279c14f7cb72b2b8b3ff99f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuControl
-  fadeOut: {fileID: 632644116}
-  bounceText: {fileID: 1203234899}
-  bigButton: {fileID: 766508451}
-  animCam: {fileID: 1530689195}
-  mainCam: {fileID: 818733509}
-  menuControls: {fileID: 1341662003}
-  buttonSelect: {fileID: 1485009853}
-  staticCam: {fileID: 818733509}
-  fadeIn: {fileID: 1135729907}
-  loadedCoins: 0
-  loadedKeys: 0
-  loadedDistance: 0
-  coinDisplay: {fileID: 1527303254}
-  keyDisplay: {fileID: 748960328}
-  distanceDisplay: {fileID: 398113592}
+  painelBotoesPrincipais: {fileID: 0}
+  mensagemCliqueInicial: {fileID: 0}
 --- !u!4 &632746054
 Transform:
   m_ObjectHideFlags: 0
@@ -8171,7 +8158,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 632746053}
         m_TargetAssemblyTypeName: MainMenuControl, Assembly-CSharp
-        m_MethodName: MenuBeginButton
+        m_MethodName: AtivarMenuDireto
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13434,7 +13421,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 632746053}
         m_TargetAssemblyTypeName: MainMenuControl, Assembly-CSharp
-        m_MethodName: SairParaSelectStage
+        m_MethodName: SairDoJogoTodo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20135,6 +20122,56 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1717785642}
   m_SourcePrefab: {fileID: 100100000, guid: d328fbd4a08ba4851befb42e554a232d, type: 3}
+--- !u!1 &2003881821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2003881823}
+  - component: {fileID: 2003881822}
+  m_Layer: 5
+  m_Name: _PauseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2003881822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003881821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21fde783279c14f7cb72b2b8b3ff99f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuControl
+  painelBotoesPrincipais: {fileID: 1341662003}
+  mensagemCliqueInicial: {fileID: 1203234899}
+--- !u!224 &2003881823
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003881821}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.39292818, y: 0.39292818, z: 0.39292818}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1080.6047, y: 479.73145}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2010326399
 GameObject:
   m_ObjectHideFlags: 0
@@ -21602,3 +21639,4 @@ SceneRoots:
   - {fileID: 1449156979}
   - {fileID: 456474363}
   - {fileID: 414714819}
+  - {fileID: 2003881823}

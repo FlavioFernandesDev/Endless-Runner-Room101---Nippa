@@ -1,93 +1,69 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System.Collections;
 using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
 public class MainMenuControl : MonoBehaviour
 {
-    [SerializeField] GameObject fadeOut;
-    [SerializeField] GameObject bounceText;
-    [SerializeField] GameObject bigButton;
-    [SerializeField] GameObject animCam;
-    [SerializeField] GameObject mainCam;
-    [SerializeField] GameObject menuControls;
-    [SerializeField] AudioSource buttonSelect;
-    public static bool hasClicked;
-    [SerializeField] GameObject staticCam;
-    [SerializeField] GameObject fadeIn;
+    [Header("Painéis do Menu")]
+    public GameObject painelBotoesPrincipais; // O que tem Start e Sair
+    public GameObject mensagemCliqueInicial;   // O que diz "Clique para Jogar"
 
-    [SerializeField] int loadedCoins;
-    [SerializeField] int loadedKeys;
-    [SerializeField] int loadedDistance;
-    [SerializeField] GameObject coinDisplay;
-    [SerializeField] GameObject keyDisplay;
-    [SerializeField] GameObject distanceDisplay;
-    
+    // static para o valor sobreviver entre cenas
+    public static bool saltarIntro = false;
 
     void Start()
     {
-        StartCoroutine(FadeInTurnOff());
-        if(hasClicked == true)
+        // Se viermos do Game Over (saltarIntro = true), mostra logo os botões
+        if (saltarIntro)
         {
-            staticCam.SetActive(true);
-            animCam.SetActive(false);
-            menuControls.SetActive(true);
-            bounceText.SetActive(false);
-            bigButton.SetActive(false);
+            AtivarMenuDireto();
+        }
+        else
+        {
+            // Se abrirmos o jogo normal, mostra a mensagem e esconde os botões
+            if (mensagemCliqueInicial != null) mensagemCliqueInicial.SetActive(true);
+            if (painelBotoesPrincipais != null) painelBotoesPrincipais.SetActive(false);
         }
     }
 
-    public void MenuBeginButton()
+    void Update()
     {
-        StartCoroutine(AnimCam());
+        // Se a mensagem inicial estiver ativa e o jogador clicar no ecrã...
+        if (mensagemCliqueInicial != null && mensagemCliqueInicial.activeSelf)
+        {
+            if (Input.GetMouseButtonDown(0)) // Clique do botão esquerdo do rato
+            {
+                AtivarMenuDireto();
+            }
+        }
+    }
+
+    public void AtivarMenuDireto()
+    {
+        if (mensagemCliqueInicial != null) mensagemCliqueInicial.SetActive(false);
+        if (painelBotoesPrincipais != null) painelBotoesPrincipais.SetActive(true);
+        
+        // Garante que o rato aparece para clicar nos botões
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    // --- FUNÇÃO PARA O BOTÃO QUIT (Aquele que está no ecrã de Game Over) ---
+    public void VoltarParaStartGame()
+    {
+        Time.timeScale = 1f;
+        saltarIntro = true; // Ativa o gatilho
+        SceneManager.LoadScene("MainMenu"); // Garante que o nome da cena está correto aqui!
     }
 
     public void StartGame()
     {
-        StartCoroutine(StartButton());
+        saltarIntro = false; // Reset para quando começar a jogar
+        SceneManager.LoadScene("StageSelect"); 
     }
 
-    IEnumerator StartButton()
+    public void SairDoJogoTodo()
     {
-        buttonSelect.Play();
-        fadeOut.SetActive(true);
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(2);
-    }
-
-    IEnumerator AnimCam()
-    {
-        animCam.GetComponent<Animator>().Play("AnimMenuCam");
-        bounceText.SetActive(false);
-        bigButton.SetActive(false);
-        yield return new WaitForSeconds(1.5f);
-        fadeIn.SetActive(false);
-        mainCam.SetActive(true);
-        animCam.SetActive(false);
-        menuControls.SetActive(true);
-        hasClicked = true;
-    }
-
-    IEnumerator FadeInTurnOff()
-    {
-        yield return new WaitForSeconds(0.05f);
-        loadedCoins = PlayerPrefs.GetInt("COINSAVE");
-        loadedKeys = PlayerPrefs.GetInt("KEYSAVE");
-        loadedDistance = PlayerPrefs.GetInt("DISTANCESAVE");
-        coinDisplay.GetComponent<TMPro.TMP_Text>().text = "" + MasterInfo.coinCount;
-        keyDisplay.GetComponent<TMPro.TMP_Text>().text = "" + MasterInfo.keyCount;
-        distanceDisplay.GetComponent<TMPro.TMP_Text>().text = "" + MasterInfo.distanceRun;
-        yield return new WaitForSeconds(1);
-        fadeIn.SetActive(false);
-    }
-
-    
-    public void SairParaSelectStage()
-    {
-        // Garante que o tempo está normal 
-        Time.timeScale = 1f;
-        // Carrega a cena de seleção de níveis
-        SceneManager.LoadScene("StageSelect");
+        Debug.Log("O Jogo fechou!");
+        Application.Quit();
     }
 }
