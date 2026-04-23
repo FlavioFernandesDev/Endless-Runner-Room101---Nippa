@@ -13,18 +13,11 @@ public class SegmentGenerator : MonoBehaviour
     [SerializeField] float spawnTriggerDistance = 60f;
     [SerializeField] float fallbackSegmentLength = 30f;
 
-    private List<GameObject> activeSegments = new List<GameObject>();
+    private readonly List<GameObject> activeSegments = new List<GameObject>();
 
     void Start()
     {
-        if (player == null)
-        {
-            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-            if (playerObject != null)
-            {
-                player = playerObject.transform;
-            }
-        }
+        TryResolvePlayer();
 
         for (int i = 0; i < initialSegmentCount; i++)
         {
@@ -34,6 +27,11 @@ public class SegmentGenerator : MonoBehaviour
 
     void Update()
     {
+        if (player == null)
+        {
+            TryResolvePlayer();
+        }
+
         if (player != null && player.position.z + spawnTriggerDistance > zPos)
         {
             SpawnSegment();
@@ -49,6 +47,7 @@ public class SegmentGenerator : MonoBehaviour
 
         segmentNum = Random.Range(0, segment.Length);
         GameObject newSegment = Instantiate(segment[segmentNum], new Vector3(0, 0, zPos), Quaternion.identity);
+        ConfigureRuntimeReferences(newSegment);
         activeSegments.Add(newSegment);
 
         CorridorTile corridorTile = newSegment.GetComponentInChildren<CorridorTile>();
@@ -65,6 +64,37 @@ public class SegmentGenerator : MonoBehaviour
         {
             Destroy(activeSegments[0]);
             activeSegments.RemoveAt(0);
+        }
+    }
+
+    private void TryResolvePlayer()
+    {
+        if (player != null)
+        {
+            return;
+        }
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+    }
+
+    private void ConfigureRuntimeReferences(GameObject segmentRoot)
+    {
+        if (segmentRoot == null || player == null)
+        {
+            return;
+        }
+
+        RandomDoor[] doors = segmentRoot.GetComponentsInChildren<RandomDoor>(true);
+        foreach (RandomDoor door in doors)
+        {
+            if (door != null)
+            {
+                door.SetPlayer(player);
+            }
         }
     }
 }

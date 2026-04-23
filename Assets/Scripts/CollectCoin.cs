@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class CollectCoin : MonoBehaviour
 {
-    [SerializeField] AudioSource coinFx;
+    [SerializeField] private AudioSource coinFx;
+    [SerializeField] private AudioClip collectClip;
+    [SerializeField] [Range(0f, 1f)] private float collectVolume = 1f;
     
     void OnTriggerEnter(Collider other)
     {
@@ -11,9 +13,11 @@ public class CollectCoin : MonoBehaviour
             return;
         }
 
-        if (coinFx != null && coinFx.clip != null)
+        AudioClip clipToPlay = coinFx != null && coinFx.clip != null ? coinFx.clip : collectClip;
+        float volumeToPlay = coinFx != null && coinFx.clip != null ? coinFx.volume : collectVolume;
+        if (clipToPlay != null)
         {
-            AudioSource.PlayClipAtPoint(coinFx.clip, transform.position, coinFx.volume);
+            AudioSource.PlayClipAtPoint(clipToPlay, transform.position, volumeToPlay);
         }
 
         RunManager.Instance.AddCoin();

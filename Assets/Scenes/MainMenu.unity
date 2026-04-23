@@ -6680,6 +6680,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5192e1189121047b924ada1ae87259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveLoad
+  coinDisplay: {fileID: 1527303256}
+  keyDisplay: {fileID: 748960330}
+  runDisplay: {fileID: 398113594}
   internalCoin: 0
   internalKey: 0
   internalDistance: 0

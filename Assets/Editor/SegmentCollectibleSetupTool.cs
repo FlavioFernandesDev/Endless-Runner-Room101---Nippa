@@ -9,6 +9,7 @@ public static class SegmentCollectibleSetupTool
     private const string KeyPrefabPath = GeneratedCollectibleFolder + "/KeyPickup.prefab";
     private const string KeyVisualPath = "Assets/Prefabs/Collectibles/Key.fbx";
     private const string GoldCoinMaterialPath = "Assets/Materials/GoldCoin.mat";
+    private const string CoinSfxPath = "Assets/Audio/Fx/CoinSFX.wav";
     private static readonly Vector3[] LaneRootLocalPositions =
     {
         new Vector3(-2f, 0.5f, 15f),
@@ -71,11 +72,31 @@ public static class SegmentCollectibleSetupTool
         collider.direction = 1;
 
         coinRoot.AddComponent<CollectableRotate>();
-        coinRoot.AddComponent<CollectCoin>();
+        CollectCoin collectCoin = coinRoot.AddComponent<CollectCoin>();
+        AssignCoinPickupAudio(collectCoin);
 
         GameObject savedPrefab = PrefabUtility.SaveAsPrefabAsset(coinRoot, CoinPrefabPath);
         Object.DestroyImmediate(coinRoot);
         return savedPrefab;
+    }
+
+    private static void AssignCoinPickupAudio(CollectCoin collectCoin)
+    {
+        if (collectCoin == null)
+        {
+            return;
+        }
+
+        AudioClip coinSfx = AssetDatabase.LoadAssetAtPath<AudioClip>(CoinSfxPath);
+        if (coinSfx == null)
+        {
+            return;
+        }
+
+        SerializedObject serializedCollectCoin = new SerializedObject(collectCoin);
+        serializedCollectCoin.FindProperty("collectClip").objectReferenceValue = coinSfx;
+        serializedCollectCoin.FindProperty("collectVolume").floatValue = 1f;
+        serializedCollectCoin.ApplyModifiedPropertiesWithoutUndo();
     }
 
     private static GameObject CreateOrUpdateKeyPrefab()
@@ -283,5 +304,88 @@ public static class SegmentCollectibleSetupTool
             speedProperty.floatValue = rotationSpeed;
             serializedRotate.ApplyModifiedPropertiesWithoutUndo();
         }
+    }
+}
+
+public static class SegmentPerformanceSetupTool
+{
+    private const int MaxRealtimePointLightsPerSegment = 3;
+
+    private static readonly string[] SegmentPrefabPaths =
+    {
+        "Assets/Prefabs/Segment.prefab",
+        "Assets/Prefabs/Segment (1).prefab",
+        "Assets/Prefabs/Segment (2).prefab",
+        "Assets/Prefabs/StartSegment.prefab"
+    };
+
+    private static readonly string[] HeavyObstaclePaths =
+    {
+        "Assets/Prefabs/Obstacles/Laundry basket.fbx",
+        "Assets/Prefabs/Obstacles/Luggage Stack.fbx",
+        "Assets/Prefabs/Obstacles/cleaning pot.fbx",
+        "Assets/Prefabs/Obstacles/Luggage.fbx"
+    };
+
+    [MenuItem("Tools/Gameplay/Optimize Corridor Performance")]
+    public static void RunBatchOptimization()
+    {
+        foreach (string prefabPath in SegmentPrefabPaths)
+        {
+            OptimizeSegmentLights(prefabPath);
+        }
+
+        foreach (string assetPath in HeavyObstaclePaths)
+        {
+            AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ForceUpdate);
+        }
+
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh();
+        Debug.Log("Corridor performance optimization completed.");
+    }
+
+    private static void OptimizeSegmentLights(string prefabPath)
+    {
+        GameObject segmentRoot = PrefabUtility.LoadPrefabContents(prefabPath);
+        try
+        {
+            Light[] lights = segmentRoot.GetComponentsInChildren<Light>(true);
+            List<Light> pointLights = new List<Light>();
+
+            foreach (Light light in lights)
+            {
+                if (light == null)
+                {
+                    continue;
+                }
+
+                light.shadows = LightShadows.None;
+
+                if (light.type == LightType.Point)
+                {
+                    pointLights.Add(light);
+                }
+            }
+
+            pointLights.Sort((left, right) => ScoreLight(right).CompareTo(ScoreLight(left)));
+
+            for (int i = 0; i < pointLights.Count; i++)
+            {
+                pointLights[i].enabled = i < MaxRealtimePointLightsPerSegment;
+                EditorUtility.SetDirty(pointLights[i]);
+            }
+
+            PrefabUtility.SaveAsPrefabAsset(segmentRoot, prefabPath);
+        }
+        finally
+        {
+            PrefabUtility.UnloadPrefabContents(segmentRoot);
+        }
+    }
+
+    private static float ScoreLight(Light light)
+    {
+        return light.intensity * light.range;
     }
 }

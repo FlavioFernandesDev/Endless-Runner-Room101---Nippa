@@ -142,3 +142,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 8300000, guid: f67ffb4b6a3ff401cb08cae708777984, type: 3}
+  collectVolume: 1
