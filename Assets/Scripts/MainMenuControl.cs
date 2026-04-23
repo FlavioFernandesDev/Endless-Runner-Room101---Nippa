@@ -62,6 +62,12 @@ public class MainMenuControl : MonoBehaviour
         SceneManager.LoadScene("StageSelect"); 
     }
 
+    public void OpenAchievements()
+    {
+        saltarIntro = true;
+        SceneManager.LoadScene(RunManager.AchievementsSceneName);
+    }
+
     public void SairDoJogoTodo()
     {
         Debug.Log("O Jogo fechou!");

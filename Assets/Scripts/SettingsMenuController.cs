@@ -48,7 +48,11 @@ public sealed class SettingsMenuController : MonoBehaviour
             return;
         }
 
-        EnsureUi(menuControl);
+        if (!EnsureUi(menuControl))
+        {
+            return;
+        }
+
         ConfigureUi();
         RefreshUi();
         ClosePanel();
@@ -95,20 +99,20 @@ public sealed class SettingsMenuController : MonoBehaviour
         }
     }
 
-    private void EnsureUi(MainMenuControl menuControl)
+    private bool EnsureUi(MainMenuControl menuControl)
     {
         Transform menuRoot = menuControl != null && menuControl.painelBotoesPrincipais != null
             ? menuControl.painelBotoesPrincipais.transform
             : null;
         if (menuRoot == null)
         {
-            return;
+            return false;
         }
 
         Button startButton = FindChildComponent<Button>(menuRoot, "StartGame");
         if (startButton == null)
         {
-            return;
+            return false;
         }
 
         TMP_Text startLabel = startButton.GetComponentInChildren<TMP_Text>(true);
@@ -116,6 +120,9 @@ public sealed class SettingsMenuController : MonoBehaviour
         {
             EnsureLocalized(startLabel, "menu.start");
         }
+
+        startButton.onClick = new Button.ButtonClickedEvent();
+        startButton.onClick.AddListener(menuControl.StartGame);
 
         Button quitButton = FindChildComponent<Button>(menuRoot, "BotãoSair");
         if (quitButton != null)
@@ -158,17 +165,46 @@ public sealed class SettingsMenuController : MonoBehaviour
         TMP_Text settingsLabel = settingsButton.GetComponentInChildren<TMP_Text>(true);
         if (settingsLabel != null)
         {
+            ConfigureMainMenuButtonLabel(settingsLabel, 48f, 30f);
             EnsureLocalized(settingsLabel, "menu.settings");
+        }
+
+        Button achievementsButton = FindChildComponent<Button>(menuRoot, "AchievementsButton");
+        if (achievementsButton == null)
+        {
+            achievementsButton = Instantiate(startButton, menuRoot);
+            achievementsButton.name = "AchievementsButton";
+            RectTransform achievementsRect = achievementsButton.GetComponent<RectTransform>();
+            RectTransform startRect = startButton.GetComponent<RectTransform>();
+            achievementsRect.anchoredPosition = startRect.anchoredPosition + new Vector2(0f, -190f);
+
+            Image achievementsImage = achievementsButton.GetComponent<Image>();
+            if (achievementsImage != null)
+            {
+                achievementsImage.color = new Color(1f, 0.84f, 0.48f, 1f);
+            }
+        }
+
+        achievementsButton.onClick = new Button.ButtonClickedEvent();
+        achievementsButton.onClick.AddListener(menuControl.OpenAchievements);
+
+        TMP_Text achievementsLabel = achievementsButton.GetComponentInChildren<TMP_Text>(true);
+        if (achievementsLabel != null)
+        {
+            ConfigureMainMenuButtonLabel(achievementsLabel, 44f, 26f);
+            EnsureLocalized(achievementsLabel, "menu.achievements");
         }
 
         if (panelRoot == null)
         {
-            Canvas canvas = FindFirstObjectByType<Canvas>(FindObjectsInactive.Include);
+            Canvas canvas = FindAnyObjectByType<Canvas>(FindObjectsInactive.Include);
             if (canvas != null)
             {
                 panelRoot = CreateSettingsPanel(canvas.transform, startButton);
             }
         }
+
+        return true;
     }
 
     private void RefreshUi()
@@ -327,8 +363,25 @@ public sealed class SettingsMenuController : MonoBehaviour
         text.fontSize = fontSize;
         text.alignment = alignment;
         text.color = Color.white;
-        text.enableWordWrapping = false;
+        text.textWrappingMode = TextWrappingModes.NoWrap;
         return text;
+    }
+
+    private static void ConfigureMainMenuButtonLabel(TMP_Text label, float maxFontSize, float minFontSize)
+    {
+        label.enableAutoSizing = true;
+        label.fontSizeMax = maxFontSize;
+        label.fontSizeMin = minFontSize;
+        label.fontSize = maxFontSize;
+        label.textWrappingMode = TextWrappingModes.NoWrap;
+        label.overflowMode = TextOverflowModes.Truncate;
+        label.alignment = TextAlignmentOptions.Center;
+
+        RectTransform labelRect = label.rectTransform;
+        labelRect.anchorMin = Vector2.zero;
+        labelRect.anchorMax = Vector2.one;
+        labelRect.offsetMin = new Vector2(18f, 0f);
+        labelRect.offsetMax = new Vector2(-18f, 0f);
     }
 
     private static void SetRect(RectTransform rectTransform, Vector2 anchorMin, Vector2 anchorMax, Vector2 anchoredPosition, Vector2 sizeDelta, Vector2 pivot)

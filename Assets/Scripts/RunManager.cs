@@ -7,6 +7,7 @@ public sealed class RunManager
     public const string StageSelectSceneName = "StageSelect";
     public const string InformationSceneName = "Information";
     public const string GameplaySceneName = "HotelCorridor1";
+    public const string AchievementsSceneName = "Achievements";
 
     private const string CoinSaveKey = "COINSAVE";
     private const string KeySaveKey = "KEYSAVE";
@@ -210,5 +211,7 @@ public sealed class RunManager
         PlayerPrefs.SetInt(KeySaveKey, TotalKeys);
         PlayerPrefs.SetInt(DistanceSaveKey, TotalDistance);
         PlayerPrefs.Save();
+
+        AchievementsManager.EvaluateAfterRun(CurrentDistance, TotalCoins, TotalKeys);
     }
 }

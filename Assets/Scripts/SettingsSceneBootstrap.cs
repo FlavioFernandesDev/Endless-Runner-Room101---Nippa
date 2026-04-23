@@ -9,7 +9,7 @@ public sealed class SettingsSceneBootstrap : MonoBehaviour
     {
         SettingsManager.LoadAndApply();
 
-        if (Object.FindFirstObjectByType<SettingsSceneBootstrap>() != null)
+        if (Object.FindAnyObjectByType<SettingsSceneBootstrap>() != null)
         {
             return;
         }
@@ -46,12 +46,14 @@ public sealed class SettingsSceneBootstrap : MonoBehaviour
     {
         SettingsManager.LoadAndApply();
         InstallMainMenuSettings(scene);
+        InstallAchievementsScene(scene);
+        ApplyStageSelectLayout(scene);
         ApplyLocalization(scene);
     }
 
     private void InstallMainMenuSettings(Scene scene)
     {
-        MainMenuControl menuControl = FindInScene<MainMenuControl>(scene);
+        MainMenuControl menuControl = FindMainMenuControl(scene);
         if (menuControl == null)
         {
             return;
@@ -68,7 +70,7 @@ public sealed class SettingsSceneBootstrap : MonoBehaviour
 
     private void ApplyLocalization(Scene scene)
     {
-        TMP_Text[] texts = Object.FindObjectsByType<TMP_Text>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        TMP_Text[] texts = Object.FindObjectsByType<TMP_Text>(FindObjectsInactive.Include);
         foreach (TMP_Text text in texts)
         {
             if (text == null || text.gameObject.scene != scene)
@@ -91,11 +93,88 @@ public sealed class SettingsSceneBootstrap : MonoBehaviour
             localizedText = text.gameObject.AddComponent<LocalizedText>();
             localizedText.AssignKey(key);
         }
+
+        if (scene.name == RunManager.AchievementsSceneName)
+        {
+            AchievementsSceneController controller = FindInScene<AchievementsSceneController>(scene);
+            if (controller != null)
+            {
+                controller.RefreshLocalizedContent();
+            }
+        }
+    }
+
+    private void InstallAchievementsScene(Scene scene)
+    {
+        if (scene.name != RunManager.AchievementsSceneName)
+        {
+            return;
+        }
+
+        AchievementsSceneController controller = FindInScene<AchievementsSceneController>(scene);
+        if (controller == null)
+        {
+            GameObject controllerObject = new GameObject("AchievementsSceneController");
+            SceneManager.MoveGameObjectToScene(controllerObject, scene);
+            controller = controllerObject.AddComponent<AchievementsSceneController>();
+        }
+
+        controller.Initialize(scene);
+    }
+
+    private void ApplyStageSelectLayout(Scene scene)
+    {
+        if (scene.name != RunManager.StageSelectSceneName)
+        {
+            return;
+        }
+
+        ConfigureStageButton(scene, "SelectAndPlay", "stage.play", new Vector2(-210f, 102f));
+        ConfigureStageButton(scene, "Sair", "stage.quit", new Vector2(210f, 102f));
+    }
+
+    private void ConfigureStageButton(Scene scene, string buttonName, string localizationKey, Vector2 anchoredPosition)
+    {
+        RectTransform buttonRect = FindNamedComponent<RectTransform>(scene, buttonName);
+        if (buttonRect == null)
+        {
+            return;
+        }
+
+        buttonRect.anchorMin = new Vector2(0.5f, 0f);
+        buttonRect.anchorMax = new Vector2(0.5f, 0f);
+        buttonRect.pivot = new Vector2(0.5f, 0.5f);
+        buttonRect.anchoredPosition = anchoredPosition;
+        buttonRect.sizeDelta = new Vector2(322f, 118f);
+
+        TMP_Text label = buttonRect.GetComponentInChildren<TMP_Text>(true);
+        if (label == null)
+        {
+            return;
+        }
+
+        RectTransform labelRect = label.rectTransform;
+        labelRect.anchorMin = Vector2.zero;
+        labelRect.anchorMax = Vector2.one;
+        labelRect.pivot = new Vector2(0.5f, 0.5f);
+        labelRect.anchoredPosition = Vector2.zero;
+        labelRect.offsetMin = Vector2.zero;
+        labelRect.offsetMax = Vector2.zero;
+
+        label.margin = Vector4.zero;
+        label.fontSize = 86f;
+        label.enableAutoSizing = true;
+        label.fontSizeMin = 44f;
+        label.fontSizeMax = 86f;
+        label.textWrappingMode = TextWrappingModes.NoWrap;
+        label.overflowMode = TextOverflowModes.Truncate;
+        label.alignment = TextAlignmentOptions.Center;
+        EnsureLocalized(label, localizationKey);
     }
 
     private static T FindInScene<T>(Scene scene) where T : Component
     {
-        T[] objects = Object.FindObjectsByType<T>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        T[] objects = Object.FindObjectsByType<T>(FindObjectsInactive.Include);
         foreach (T current in objects)
         {
             if (current != null && current.gameObject.scene == scene)
@@ -105,5 +184,53 @@ public sealed class SettingsSceneBootstrap : MonoBehaviour
         }
 
         return null;
+    }
+
+    private static T FindNamedComponent<T>(Scene scene, string objectName) where T : Component
+    {
+        T[] objects = Object.FindObjectsByType<T>(FindObjectsInactive.Include);
+        foreach (T current in objects)
+        {
+            if (current != null && current.gameObject.scene == scene && current.gameObject.name == objectName)
+            {
+                return current;
+            }
+        }
+
+        return null;
+    }
+
+    private static MainMenuControl FindMainMenuControl(Scene scene)
+    {
+        MainMenuControl[] controls = Object.FindObjectsByType<MainMenuControl>(FindObjectsInactive.Include);
+        MainMenuControl fallback = null;
+
+        foreach (MainMenuControl current in controls)
+        {
+            if (current == null || current.gameObject.scene != scene)
+            {
+                continue;
+            }
+
+            fallback ??= current;
+
+            if (current.painelBotoesPrincipais != null)
+            {
+                return current;
+            }
+        }
+
+        return fallback != null && fallback.painelBotoesPrincipais != null ? fallback : null;
+    }
+
+    private static void EnsureLocalized(TMP_Text text, string key)
+    {
+        LocalizedText localizedText = text.GetComponent<LocalizedText>();
+        if (localizedText == null)
+        {
+            localizedText = text.gameObject.AddComponent<LocalizedText>();
+        }
+
+        localizedText.AssignKey(key);
     }
 }
