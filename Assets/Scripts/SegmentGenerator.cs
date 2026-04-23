@@ -51,7 +51,7 @@ public class SegmentGenerator : MonoBehaviour
         GameObject newSegment = Instantiate(segment[segmentNum], new Vector3(0, 0, zPos), Quaternion.identity);
         activeSegments.Add(newSegment);
 
-        CorridorTile corridorTile = newSegment.GetComponent<CorridorTile>();
+        CorridorTile corridorTile = newSegment.GetComponentInChildren<CorridorTile>();
         if (corridorTile != null)
         {
             zPos = corridorTile.GetNextSpawnZ();

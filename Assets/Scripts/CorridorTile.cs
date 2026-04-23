@@ -19,9 +19,16 @@ public class CorridorTile : MonoBehaviour
     public float highSpeedThreshold = 8f;
     public float fallbackTileLength = 30f;
 
+    private SegmentCollectibleSpawner _collectibleSpawner;
+
+    private void Awake()
+    {
+        _collectibleSpawner = GetComponent<SegmentCollectibleSpawner>();
+    }
+
     private void Start()
     {
-        SpawnObstacles();
+        SpawnObstaclesAndCollectibles();
         SpawnDecorations();
     }
 
@@ -30,7 +37,7 @@ public class CorridorTile : MonoBehaviour
         return endNode != null ? endNode.position.z : transform.position.z + fallbackTileLength;
     }
 
-    private void SpawnObstacles()
+    private void SpawnObstaclesAndCollectibles()
     {
         if (lanePoints == null || lanePoints.Length == 0)
         {
@@ -41,6 +48,12 @@ public class CorridorTile : MonoBehaviour
         int maxBlocked = Mathf.Max(0, lanePoints.Length - 1);
         int desiredBlocked = RunManager.Instance.CurrentSpeed >= highSpeedThreshold ? highSpeedBlockedLanes : lowSpeedBlockedLanes;
         int blockedLanes = Mathf.Clamp(desiredBlocked, 0, maxBlocked);
+        bool canSpawnObstacles = obstaclePrefabs != null && obstaclePrefabs.Length > 0;
+
+        if (!canSpawnObstacles)
+        {
+            blockedLanes = 0;
+        }
 
         bool[] blocked = new bool[lanePoints.Length];
         int spawnedBlocked = 0;
@@ -53,25 +66,18 @@ public class CorridorTile : MonoBehaviour
                 continue;
             }
 
+            if (!SpawnAtLane(laneIndex, obstaclePrefabs))
+            {
+                break;
+            }
+
             blocked[laneIndex] = true;
-            SpawnAtLane(laneIndex, obstaclePrefabs);
             spawnedBlocked += 1;
         }
 
-        bool collectiblePlaced = false;
-        for (int i = 0; i < lanePoints.Length; i++)
+        if (_collectibleSpawner != null)
         {
-            if (blocked[i])
-            {
-                continue;
-            }
-
-            bool isClearLane = i == clearLane;
-            float collectibleChance = isClearLane ? 0.7f : 0.3f;
-            if (!collectiblePlaced && Random.value <= collectibleChance)
-            {
-                collectiblePlaced = SpawnAtLane(i, collectiblePrefabs);
-            }
+            _collectibleSpawner.SpawnCollectibles(lanePoints, blocked, clearLane, RunManager.Instance.CurrentDistance);
         }
     }
 
