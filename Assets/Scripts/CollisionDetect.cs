@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,24 +9,86 @@ public class CollisionDetect : MonoBehaviour
     [SerializeField] AudioSource collisionFx;
     [SerializeField] GameObject mainCam;
     [SerializeField] GameObject fadeOut;
+    [SerializeField] string triggeringTag = "Player";
+    private bool _hasTriggered;
 
 
     void OnTriggerEnter(Collider other)
     {
-        SaveLoad.saveData = true;
-        StartCoroutine(CollisionEnd());
+        if (_hasTriggered || !other.CompareTag(triggeringTag))
+        {
+            return;
+        }
+
+        if (SceneManager.GetActiveScene().name != RunManager.GameplaySceneName)
+        {
+            return;
+        }
+
+        PlayerMovement movement = null;
+        if (thePlayer != null)
+        {
+            movement = thePlayer.GetComponent<PlayerMovement>();
+        }
+
+        if (movement == null)
+        {
+            movement = other.GetComponentInParent<PlayerMovement>();
+        }
+
+        if (movement != null && movement.TryHandleProtectedDoorHit(transform))
+        {
+            return;
+        }
+
+        _hasTriggered = true;
+        RunManager.Instance.EndRun();
+        StartCoroutine(CollisionEnd(movement));
     }
 
-    IEnumerator CollisionEnd()
+    IEnumerator CollisionEnd(PlayerMovement movement)
     {
-        collisionFx.Play();
-        thePlayer.GetComponent<PlayerMovement>().enabled = false;
-        playerAnim.GetComponent<Animator>().Play("Stumble Backwards");
-        mainCam.GetComponent<Animator>().Play("CollisionCam");
+        if (collisionFx != null)
+        {
+            collisionFx.Play();
+        }
+
+        if (movement == null && thePlayer != null)
+        {
+            movement = thePlayer.GetComponent<PlayerMovement>();
+        }
+
+        if (movement != null)
+        {
+            movement.HandleFatalCollision(false);
+        }
+
+        if (playerAnim != null)
+        {
+            Animator playerAnimator = playerAnim.GetComponent<Animator>();
+            if (playerAnimator != null)
+            {
+                playerAnimator.Play("Stumble Backwards");
+            }
+        }
+
+        if (mainCam != null)
+        {
+            Animator cameraAnimator = mainCam.GetComponent<Animator>();
+            if (cameraAnimator != null)
+            {
+                cameraAnimator.Play("CollisionCam");
+            }
+        }
+
         yield return new WaitForSeconds(2);
-        fadeOut.SetActive(true);
+        if (fadeOut != null)
+        {
+            fadeOut.SetActive(true);
+        }
+
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(RunManager.StageSelectSceneName);
     }
 
 }
