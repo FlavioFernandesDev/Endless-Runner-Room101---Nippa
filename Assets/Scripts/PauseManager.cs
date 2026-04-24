@@ -8,6 +8,11 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
+        if (!RunManager.Instance.IsGameplaySceneActive() || RunManager.Instance.IsGameOver)
+        {
+            return;
+        }
+
         // Se carregar na tecla ESC ou P
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
@@ -24,27 +29,40 @@ public class PauseManager : MonoBehaviour
 
     public void Continuar()
     {
-        pauseMenuUI.SetActive(false); // Esconde o menu
-        Time.timeScale = 1f;          // O tempo volta ao normal
+        if (pauseMenuUI != null)
+        {
+            pauseMenuUI.SetActive(false);
+        }
+
+        RunManager.Instance.ResumeRun();
         jogoPausado = false;
     }
 
     void Pausar()
     {
-        pauseMenuUI.SetActive(true);  // Mostra o menu
-        Time.timeScale = 0f;          // O tempo PARA totalmente
+        if (pauseMenuUI != null)
+        {
+            pauseMenuUI.SetActive(true);
+        }
+
+        RunManager.Instance.PauseRun();
         jogoPausado = true;
     }
 
     public void IrParaMenu()
     {
-        Time.timeScale = 1f; // Importante: repor o tempo antes de mudar de cena
-        SceneManager.LoadScene("StageSelect"); // Nome da tua cena de menu
+        jogoPausado = false;
+        if (pauseMenuUI != null)
+        {
+            pauseMenuUI.SetActive(false);
+        }
+
+        RunManager.Instance.ExitToStageSelect();
     }
 
     public void SairDoJogo()
     {
-    Debug.Log("O utilizador clicou em Sair!");
-    Application.Quit(); // Este comando fecha o ficheiro .exe ou .app final
+        Debug.Log("O utilizador clicou em Sair!");
+        Application.Quit();
     }
 }

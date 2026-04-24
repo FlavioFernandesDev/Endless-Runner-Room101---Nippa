@@ -1,39 +1,54 @@
+using TMPro;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-
 
 public class SaveLoad : MonoBehaviour
 {
-    public static int loadedCoins;
-    public static int loadedKeys;
-    public static int loadedDistance;
+    public static int loadedCoins => RunManager.Instance.TotalCoins;
+    public static int loadedKeys => RunManager.Instance.TotalKeys;
+    public static int loadedDistance => RunManager.Instance.TotalDistance;
 
-    public static bool saveData;
-
+    [SerializeField] TMP_Text coinDisplay;
+    [SerializeField] TMP_Text keyDisplay;
+    [SerializeField] TMP_Text runDisplay;
     [SerializeField] int internalCoin;
     [SerializeField] int internalKey;
     [SerializeField] int internalDistance;
 
-    void Start()
+    private void Awake()
     {
-        loadedCoins = PlayerPrefs.GetInt("COINSAVE");
-        loadedKeys = PlayerPrefs.GetInt("KEYSAVE");
-        loadedDistance = PlayerPrefs.GetInt("DISTANCESAVE");
+        RefreshSnapshot();
     }
 
-    
-    void Update()
+    private void OnEnable()
     {
-        internalCoin = loadedCoins + MasterInfo.coinCount;
-        internalKey = loadedKeys + MasterInfo.keyCount;
-        internalDistance = loadedDistance + MasterInfo.distanceRun;
-        if (saveData == true)
+        RefreshSnapshot();
+    }
+
+    [ContextMenu("Refresh Snapshot")]
+    public void RefreshSnapshot()
+    {
+        if (RunManager.Instance == null)
         {
-            saveData = false;
-            PlayerPrefs.SetInt("COINSAVE", internalCoin);
-            PlayerPrefs.SetInt("KEYSAVE", internalKey);
-            PlayerPrefs.SetInt("DISTANCESAVE", internalDistance);
+            return;
+        }
+
+        internalCoin = RunManager.Instance.TotalCoins;
+        internalKey = RunManager.Instance.TotalKeys;
+        internalDistance = RunManager.Instance.TotalDistance;
+
+        if (coinDisplay != null)
+        {
+            coinDisplay.text = internalCoin.ToString();
+        }
+
+        if (keyDisplay != null)
+        {
+            keyDisplay.text = internalKey.ToString();
+        }
+
+        if (runDisplay != null)
+        {
+            runDisplay.text = internalDistance.ToString();
         }
     }
 }

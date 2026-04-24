@@ -412,6 +412,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &7583416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,6 +556,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &10094762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,6 +700,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &18359066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1312,6 +1318,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &72615622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1883,6 +1891,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &146670375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2355,6 +2365,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &183219408
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2408,6 +2419,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &197704721
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2673,6 +2685,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &217655473
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2743,6 +2756,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &224572686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2995,6 +3010,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &251849911
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3525,6 +3541,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &322281918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3799,6 +3817,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &339228166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5528,6 +5548,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &535205598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5720,6 +5742,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &562057186
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5895,6 +5918,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &567375468
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5965,6 +5989,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &568614415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6680,6 +6706,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5192e1189121047b924ada1ae87259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveLoad
+  coinDisplay: {fileID: 1527303256}
+  keyDisplay: {fileID: 748960330}
+  runDisplay: {fileID: 398113594}
   internalCoin: 0
   internalKey: 0
   internalDistance: 0
@@ -6732,6 +6761,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &646822190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6857,6 +6888,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &654410785
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6963,6 +6995,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &694194448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7655,6 +7689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &753217294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7797,6 +7833,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &754478833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7944,6 +7982,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &765633738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8255,6 +8295,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &774324780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8397,6 +8439,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &777058516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8721,6 +8765,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &792758830
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9008,6 +9053,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &833790922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9155,6 +9202,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &839093476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9297,6 +9346,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &856368563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9511,6 +9562,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &862250858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9785,6 +9838,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &920221348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10401,6 +10456,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &959338926
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10964,6 +11020,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &1015445804
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11201,6 +11258,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &1058096380
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11724,6 +11782,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &1122089369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12015,6 +12075,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &1150113953
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12550,147 +12611,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3ed06ab3fd9f0489ebcf0070cef39320, type: 3}
   m_PrefabInstance: {fileID: 1358015625}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1203234899
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1203234900}
-  - component: {fileID: 1203234902}
-  - component: {fileID: 1203234901}
-  m_Layer: 5
-  m_Name: ClickToStart
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1203234900
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203234899}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2038697122}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 111, y: 366}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1203234901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203234899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: 'GAME OVER!
-
-    CLICK TO PLAY AGAIN!
-
-'
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 1
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_characterHorizontalScale: 1
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 0
-  m_ActiveFontFeatures: 6e72656b
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_EmojiFallbackSupport: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: -378.87018, y: 0, z: -159.77269, w: -81.66405}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1203234902
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203234899}
-  m_CullTransparentMesh: 1
 --- !u!1001 &1209384887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12872,6 +12792,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &1231892985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14531,6 +14453,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &1365935728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14651,6 +14575,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &1371714605
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15010,6 +14935,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &1414857842
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15610,6 +15536,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &1503188438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15835,6 +15763,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &1519419940
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16872,6 +16801,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &1585627149
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17124,6 +17054,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &1612288501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17334,6 +17266,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &1638191551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17682,6 +17616,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &1656788463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18081,6 +18017,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &1690370762
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18230,6 +18167,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &1716950527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18425,6 +18364,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &1717785643
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19182,6 +19122,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &1902876649
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19341,6 +19282,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &1936336396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19707,6 +19650,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &1965688373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20153,7 +20098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuControl
   painelBotoesPrincipais: {fileID: 1341662003}
-  mensagemCliqueInicial: {fileID: 1203234899}
+  mensagemCliqueInicial: {fileID: 0}
 --- !u!224 &2003881823
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20313,6 +20258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &2032865704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20619,7 +20566,6 @@ RectTransform:
   - {fileID: 632644120}
   - {fileID: 766508452}
   - {fileID: 1335162767}
-  - {fileID: 1203234900}
   - {fileID: 1135729908}
   - {fileID: 1341662004}
   m_Father: {fileID: 0}
@@ -20700,6 +20646,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &2040148069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21109,6 +21057,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &2070439479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21254,6 +21203,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &2091923040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21396,6 +21347,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollectCoin
   coinFx: {fileID: 0}
+  collectClip: {fileID: 0}
+  collectVolume: 1
 --- !u!114 &2095575051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21619,6 +21572,7 @@ MonoBehaviour:
   collisionFx: {fileID: 0}
   mainCam: {fileID: 0}
   fadeOut: {fileID: 0}
+  triggeringTag: Player
 --- !u!65 &2145340306
 BoxCollider:
   m_ObjectHideFlags: 0

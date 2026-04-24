@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RandomDoor : MonoBehaviour
@@ -11,47 +10,94 @@ public class RandomDoor : MonoBehaviour
     [Header("Configurações de Animação")]
     public float openAngle = 90f;
     public float openSpeed = 2f;
-    public float distanceToTrigger = 20f; // Distância para a porta "acordar"
+    public float distanceToTrigger = 14f;
+    public float minimumForwardOffset = -2f;
 
     [Header("Referências (Opcional)")]
     public AudioSource audioSource;
+    public AudioSource protectedHitAudioSource;
+    public Transform player;
 
     private bool jaTentouAbrir = false;
-    private Transform player;
     private Quaternion closedRot;
     private Quaternion openRot;
+    private Coroutine _animationCoroutine;
+    private bool _isOpen;
+    private bool _isAnimating;
+    private bool _initialized;
+    private RunManager _runManager;
+
+    public bool IsOpen => _isOpen;
+    public bool IsAnimating => _isAnimating;
 
     void Start()
     {
-        // Guarda a rotação inicial (fechada)
-        closedRot = transform.localRotation;
-        
-        // Calcula a rotação final (aberta) somando o ângulo no eixo Y
-        openRot = Quaternion.Euler(transform.localEulerAngles.x, transform.localEulerAngles.y + openAngle, transform.localEulerAngles.z);
+        InitializeRuntimeState();
+    }
 
-        // Procura o jogador
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
+    private void InitializeRuntimeState()
+    {
+        if (_initialized)
         {
-            player = playerObj.transform;
+            return;
         }
-        
-        Debug.Log("Porta " + gameObject.name + " pronta e à espera do jogador.");
+
+        _initialized = true;
+        closedRot = transform.localRotation;
+        openRot = Quaternion.Euler(transform.localEulerAngles.x, transform.localEulerAngles.y + openAngle, transform.localEulerAngles.z);
+        _runManager = RunManager.Instance;
+
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.transform;
+            }
+        }
     }
 
     void Update()
     {
-        if (player == null) return;
-
-        // Calcula a distância entre esta porta e o jogador
-        float dist = Vector3.Distance(transform.position, player.position);
-
-        // Se o jogador chegar perto e a porta ainda não tiver sido testada
-        if (!jaTentouAbrir && dist < distanceToTrigger)
+        if (player == null || (_runManager != null && _runManager.IsGameOver))
         {
-            jaTentouAbrir = true;
-            TentarAbrirPorta();
+            return;
         }
+
+        if (jaTentouAbrir)
+        {
+            return;
+        }
+
+        float forwardDelta = transform.position.z - player.position.z;
+        if (forwardDelta > distanceToTrigger || forwardDelta < minimumForwardOffset)
+        {
+            return;
+        }
+
+        jaTentouAbrir = true;
+        TentarAbrirPorta();
+    }
+
+    public void SetPlayer(Transform playerTransform)
+    {
+        player = playerTransform;
+    }
+
+    public void ResetRuntimeState()
+    {
+        InitializeRuntimeState();
+
+        if (_animationCoroutine != null)
+        {
+            StopCoroutine(_animationCoroutine);
+            _animationCoroutine = null;
+        }
+
+        jaTentouAbrir = false;
+        _isOpen = false;
+        _isAnimating = false;
+        transform.localRotation = closedRot;
     }
 
     void TentarAbrirPorta()
@@ -60,9 +106,8 @@ public class RandomDoor : MonoBehaviour
 
         if (sorteio < chanceToOpen)
         {
-            StartCoroutine(AnimarPorta());
-            
-            // Toca o som apenas se ele estiver atribuído (evita o erro vermelho)
+            StartDoorAnimation(openRot, true);
+
             if (audioSource != null)
             {
                 audioSource.Play();
@@ -70,14 +115,59 @@ public class RandomDoor : MonoBehaviour
         }
     }
 
-    IEnumerator AnimarPorta()
+    public bool TryConsumeDoorHit()
     {
+        if (!_isOpen)
+        {
+            return false;
+        }
+
+        StartDoorAnimation(closedRot, false);
+
+        AudioSource feedbackSource = protectedHitAudioSource != null ? protectedHitAudioSource : audioSource;
+        if (feedbackSource != null)
+        {
+            feedbackSource.Play();
+        }
+
+        return true;
+    }
+
+    private void StartDoorAnimation(Quaternion targetRotation, bool opening)
+    {
+        if (_animationCoroutine != null)
+        {
+            StopCoroutine(_animationCoroutine);
+        }
+
+        if (opening)
+        {
+            _isOpen = true;
+        }
+
+        _animationCoroutine = StartCoroutine(AnimateDoor(targetRotation, opening));
+    }
+
+    private IEnumerator AnimateDoor(Quaternion targetRotation, bool opening)
+    {
+        _isAnimating = true;
+        if (!opening)
+        {
+            _isOpen = false;
+        }
+
         float t = 0;
+        Quaternion startRotation = transform.localRotation;
         while (t < 1f)
         {
             t += Time.deltaTime * openSpeed;
-            transform.localRotation = Quaternion.Slerp(closedRot, openRot, t);
+            transform.localRotation = Quaternion.Slerp(startRotation, targetRotation, t);
             yield return null;
         }
+
+        transform.localRotation = targetRotation;
+        _isAnimating = false;
+        _isOpen = opening;
+        _animationCoroutine = null;
     }
 }

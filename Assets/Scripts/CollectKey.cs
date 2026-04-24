@@ -1,15 +1,42 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System.Collections;
 
-public class CollectGem : MonoBehaviour
+public class CollectKey : MonoBehaviour
 {
     [SerializeField] AudioSource coinFx;
     
     void OnTriggerEnter(Collider other)
     {
-        coinFx.Play();
-        MasterInfo.keyCount += 1;
-        this.gameObject.SetActive(false);
+        if (!IsPlayerCollector(other))
+        {
+            return;
+        }
+
+        if (coinFx != null && coinFx.clip != null)
+        {
+            AudioSource.PlayClipAtPoint(coinFx.clip, transform.position, coinFx.volume);
+        }
+
+        RunManager.Instance.AddKey();
+        gameObject.SetActive(false);
+    }
+
+    private static bool IsPlayerCollector(Collider other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+
+        if (other.CompareTag("Player"))
+        {
+            return true;
+        }
+
+        if (other.attachedRigidbody != null && other.attachedRigidbody.GetComponent<PlayerMovement>() != null)
+        {
+            return true;
+        }
+
+        return other.GetComponentInParent<PlayerMovement>() != null;
     }
 }

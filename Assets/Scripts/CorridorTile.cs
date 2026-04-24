@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class CorridorTile : MonoBehaviour
 {
@@ -15,45 +14,172 @@ public class CorridorTile : MonoBehaviour
     public GameObject[] obstaclePrefabs;
     public GameObject[] collectiblePrefabs;
     public GameObject[] wallDecorPrefabs;
+    public int lowSpeedBlockedLanes = 1;
+    public int highSpeedBlockedLanes = 2;
+    public float highSpeedThreshold = 8f;
+    public float fallbackTileLength = 30f;
+
+    private SegmentCollectibleSpawner _collectibleSpawner;
+    private Transform _runtimeSpawnContainer;
+    private RuntimePrefabPool _runtimePrefabPool;
+    private const string RuntimeSpawnContainerName = "RuntimeTileSpawns";
+
+    private void Awake()
+    {
+        _collectibleSpawner = GetComponent<SegmentCollectibleSpawner>();
+        _runtimePrefabPool = RuntimePrefabPool.GetOrCreate(gameObject);
+    }
 
     private void Start()
     {
-        SpawnObstacles();
-        SpawnDecorations();
+        RegenerateRuntimeContent();
     }
 
-    private void SpawnObstacles()
+    public void RegenerateRuntimeContent()
     {
-        // Simple logic: pick 1 or 2 lanes for obstacles, keep at least 1 clear.
-        int clearLane = Random.Range(0, lanePoints.Length);
-        
-        for (int i = 0; i < lanePoints.Length; i++)
-        {
-            if (i == clearLane) continue;
+        ClearRuntimeSpawnContainer();
+        SpawnObstaclesAndCollectibles();
+        SpawnDecorations();
+        RuntimeSegmentOptimizer.ApplyToSegment(gameObject);
+        HauntedLevelStyler.ApplyTo(gameObject);
+    }
 
-            // 50% chance of spawning an obstacle in a non-clear lane
-            if (Random.value > 0.5f && obstaclePrefabs.Length > 0)
+    public float GetNextSpawnZ()
+    {
+        return endNode != null ? endNode.position.z : transform.position.z + fallbackTileLength;
+    }
+
+    private void SpawnObstaclesAndCollectibles()
+    {
+        if (lanePoints == null || lanePoints.Length == 0)
+        {
+            return;
+        }
+
+        int clearLane = Random.Range(0, lanePoints.Length);
+        int maxBlocked = Mathf.Max(0, lanePoints.Length - 1);
+        int desiredBlocked = RunManager.Instance.CurrentSpeed >= highSpeedThreshold ? highSpeedBlockedLanes : lowSpeedBlockedLanes;
+        int blockedLanes = Mathf.Clamp(desiredBlocked, 0, maxBlocked);
+        bool canSpawnObstacles = obstaclePrefabs != null && obstaclePrefabs.Length > 0;
+
+        if (!canSpawnObstacles)
+        {
+            blockedLanes = 0;
+        }
+
+        bool[] blocked = new bool[lanePoints.Length];
+        int spawnedBlocked = 0;
+
+        while (spawnedBlocked < blockedLanes)
+        {
+            int laneIndex = Random.Range(0, lanePoints.Length);
+            if (laneIndex == clearLane || blocked[laneIndex])
             {
-                GameObject prefab = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
-                Instantiate(prefab, lanePoints[i].position, Quaternion.identity, transform);
+                continue;
             }
-            // 20% chance of spawning a collectible if no obstacle
-            else if (Random.value > 0.8f && collectiblePrefabs.Length > 0)
+
+            if (!SpawnAtLane(laneIndex, obstaclePrefabs))
             {
-                GameObject prefab = collectiblePrefabs[Random.Range(0, collectiblePrefabs.Length)];
-                Instantiate(prefab, lanePoints[i].position, Quaternion.identity, transform);
+                break;
             }
+
+            blocked[laneIndex] = true;
+            spawnedBlocked += 1;
+        }
+
+        if (_collectibleSpawner != null)
+        {
+            _collectibleSpawner.SpawnCollectibles(lanePoints, blocked, clearLane, RunManager.Instance.CurrentDistance);
         }
     }
 
     private void SpawnDecorations()
     {
+        if (wallDecorPoints == null || wallDecorPrefabs == null || wallDecorPrefabs.Length == 0)
+        {
+            return;
+        }
+
         foreach (Transform point in wallDecorPoints)
         {
-            if (Random.value > 0.6f && wallDecorPrefabs.Length > 0)
+            if (point != null && Random.value > 0.6f)
             {
                 GameObject prefab = wallDecorPrefabs[Random.Range(0, wallDecorPrefabs.Length)];
-                Instantiate(prefab, point.position, point.rotation, transform);
+                SpawnRuntimePrefab(prefab, point.position, point.rotation, GetOrCreateRuntimeSpawnContainer());
+            }
+        }
+    }
+
+    private bool SpawnAtLane(int laneIndex, GameObject[] prefabs)
+    {
+        if (prefabs == null || prefabs.Length == 0 || lanePoints == null || laneIndex < 0 || laneIndex >= lanePoints.Length)
+        {
+            return false;
+        }
+
+        Transform lanePoint = lanePoints[laneIndex];
+        if (lanePoint == null)
+        {
+            return false;
+        }
+
+        GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
+        SpawnRuntimePrefab(prefab, lanePoint.position, lanePoint.rotation, GetOrCreateRuntimeSpawnContainer());
+        return true;
+    }
+
+    private void SpawnRuntimePrefab(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
+    {
+        if (Application.isPlaying && _runtimePrefabPool != null)
+        {
+            _runtimePrefabPool.Get(prefab, position, rotation, parent);
+            return;
+        }
+
+        Instantiate(prefab, position, rotation, parent);
+    }
+
+    private Transform GetOrCreateRuntimeSpawnContainer()
+    {
+        if (_runtimeSpawnContainer != null)
+        {
+            return _runtimeSpawnContainer;
+        }
+
+        Transform existingContainer = transform.Find(RuntimeSpawnContainerName);
+        if (existingContainer != null)
+        {
+            _runtimeSpawnContainer = existingContainer;
+            return _runtimeSpawnContainer;
+        }
+
+        GameObject container = new GameObject(RuntimeSpawnContainerName);
+        container.transform.SetParent(transform, false);
+        _runtimeSpawnContainer = container.transform;
+        return _runtimeSpawnContainer;
+    }
+
+    private void ClearRuntimeSpawnContainer()
+    {
+        Transform container = GetOrCreateRuntimeSpawnContainer();
+        for (int i = container.childCount - 1; i >= 0; i--)
+        {
+            GameObject child = container.GetChild(i).gameObject;
+            if (Application.isPlaying)
+            {
+                if (_runtimePrefabPool != null)
+                {
+                    _runtimePrefabPool.Release(child);
+                }
+                else
+                {
+                    child.SetActive(false);
+                    Destroy(child);
+                }
+            }
+            else
+            {
+                DestroyImmediate(child);
             }
         }
     }
