@@ -7,6 +7,7 @@ public sealed class RunManager
     public const string StageSelectSceneName = "StageSelect";
     public const string InformationSceneName = "Information";
     public const string GameplaySceneName = "HotelCorridor1";
+    public const string HauntedGameplaySceneName = "HotelHaunted";
     public const string AchievementsSceneName = "Achievements";
 
     private const string CoinSaveKey = "COINSAVE";
@@ -30,6 +31,7 @@ public sealed class RunManager
     public float CurrentSpeed { get; private set; }
     public bool IsPaused { get; private set; }
     public bool IsGameOver { get; private set; }
+    public string SelectedGameplaySceneName { get; private set; } = GameplaySceneName;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Bootstrap()
@@ -56,7 +58,7 @@ public sealed class RunManager
         IsPaused = false;
         CurrentSpeed = 0f;
 
-        if (scene.name == GameplaySceneName)
+        if (IsGameplayScene(scene.name))
         {
             ResetRunState();
             return;
@@ -100,9 +102,19 @@ public sealed class RunManager
         TotalDistance = PlayerPrefs.GetInt(DistanceSaveKey, 0);
     }
 
-    private bool IsGameplaySceneActive()
+    public bool IsGameplaySceneActive()
     {
-        return SceneManager.GetActiveScene().name == GameplaySceneName;
+        return IsGameplayScene(SceneManager.GetActiveScene().name);
+    }
+
+    public bool IsGameplayScene(string sceneName)
+    {
+        return sceneName == GameplaySceneName || sceneName == HauntedGameplaySceneName;
+    }
+
+    public void SelectGameplayScene(string sceneName)
+    {
+        SelectedGameplaySceneName = IsGameplayScene(sceneName) ? sceneName : GameplaySceneName;
     }
 
     public void SetForwardSpeed(float speed)

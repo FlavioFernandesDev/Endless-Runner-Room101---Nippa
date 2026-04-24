@@ -139,7 +139,7 @@ public sealed class SettingsMenuController : MonoBehaviour
             TMP_Text promptText = menuControl.mensagemCliqueInicial.GetComponent<TMP_Text>();
             if (promptText != null)
             {
-                EnsureLocalized(promptText, "menu.game_over_prompt");
+                EnsureLocalized(promptText, "menu.start_prompt");
             }
         }
 

@@ -8,7 +8,7 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (SceneManager.GetActiveScene().name != RunManager.GameplaySceneName || RunManager.Instance.IsGameOver)
+        if (!RunManager.Instance.IsGameplaySceneActive() || RunManager.Instance.IsGameOver)
         {
             return;
         }

@@ -57,6 +57,12 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        if (_rb != null)
+        {
+            _rb.interpolation = RigidbodyInterpolation.Interpolate;
+            _rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        }
+
         _playerInput = GetComponent<PlayerInput>();
         
         if (_playerInput != null && _playerInput.actions != null)
@@ -259,18 +265,15 @@ public class PlayerMovement : MonoBehaviour
                 _rb.AddForce(new Vector3(0f, 4f, -4f), ForceMode.Impulse);
             }
         }
-
-        StartCoroutine(ReturnToStageSelect());
-    }
-
-    private IEnumerator ReturnToStageSelect()
-    {
-        yield return new WaitForSeconds(deathReturnDelay);
-        RunManager.Instance.ExitToStageSelect();
     }
     
     private void OnCollisionEnter(Collision collision)
     {
+        if (isDead || RunManager.Instance.IsGameOver)
+        {
+            return;
+        }
+
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             if (TryHandleProtectedDoorCollision(collision))
@@ -279,6 +282,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             HandleFatalCollision();
+            StartCoroutine(GameOverTransition.Play(null, deathReturnDelay));
         }
     }
 }

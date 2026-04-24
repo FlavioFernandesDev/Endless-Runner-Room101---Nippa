@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public sealed class SettingsSceneBootstrap : MonoBehaviour
 {
@@ -129,28 +131,40 @@ public sealed class SettingsSceneBootstrap : MonoBehaviour
             return;
         }
 
-        ConfigureStageButton(scene, "SelectAndPlay", "stage.play", new Vector2(-210f, 102f));
-        ConfigureStageButton(scene, "Sair", "stage.quit", new Vector2(210f, 102f));
+        StageControls stageControls = FindInScene<StageControls>(scene);
+        RectTransform roomRunButton = ConfigureStageButton(scene, "SelectAndPlay", "stage.room_run", new Vector2(-380f, 102f));
+        EnsureHauntedStageButton(scene, roomRunButton);
+        RectTransform hauntedButton = ConfigureStageButton(scene, "HauntedHotel", "stage.haunted_hotel", new Vector2(0f, 102f));
+        RectTransform quitButton = ConfigureStageButton(scene, "Sair", "stage.quit", new Vector2(380f, 102f));
+
+        if (stageControls == null)
+        {
+            return;
+        }
+
+        ConfigureButtonClick(roomRunButton, stageControls.PlayRoomRun);
+        ConfigureButtonClick(hauntedButton, stageControls.PlayHauntedHotel);
+        ConfigureButtonClick(quitButton, stageControls.ReturnToMainMenu);
     }
 
-    private void ConfigureStageButton(Scene scene, string buttonName, string localizationKey, Vector2 anchoredPosition)
+    private RectTransform ConfigureStageButton(Scene scene, string buttonName, string localizationKey, Vector2 anchoredPosition)
     {
         RectTransform buttonRect = FindNamedComponent<RectTransform>(scene, buttonName);
         if (buttonRect == null)
         {
-            return;
+            return null;
         }
 
         buttonRect.anchorMin = new Vector2(0.5f, 0f);
         buttonRect.anchorMax = new Vector2(0.5f, 0f);
         buttonRect.pivot = new Vector2(0.5f, 0.5f);
         buttonRect.anchoredPosition = anchoredPosition;
-        buttonRect.sizeDelta = new Vector2(322f, 118f);
+        buttonRect.sizeDelta = new Vector2(330f, 118f);
 
         TMP_Text label = buttonRect.GetComponentInChildren<TMP_Text>(true);
         if (label == null)
         {
-            return;
+            return buttonRect;
         }
 
         RectTransform labelRect = label.rectTransform;
@@ -164,12 +178,41 @@ public sealed class SettingsSceneBootstrap : MonoBehaviour
         label.margin = Vector4.zero;
         label.fontSize = 86f;
         label.enableAutoSizing = true;
-        label.fontSizeMin = 44f;
+        label.fontSizeMin = 34f;
         label.fontSizeMax = 86f;
         label.textWrappingMode = TextWrappingModes.NoWrap;
         label.overflowMode = TextOverflowModes.Truncate;
         label.alignment = TextAlignmentOptions.Center;
         EnsureLocalized(label, localizationKey);
+        return buttonRect;
+    }
+
+    private void EnsureHauntedStageButton(Scene scene, RectTransform templateButton)
+    {
+        if (FindNamedComponent<RectTransform>(scene, "HauntedHotel") != null || templateButton == null)
+        {
+            return;
+        }
+
+        GameObject hauntedButton = Object.Instantiate(templateButton.gameObject, templateButton.parent);
+        hauntedButton.name = "HauntedHotel";
+    }
+
+    private void ConfigureButtonClick(RectTransform buttonRect, UnityAction action)
+    {
+        if (buttonRect == null || action == null)
+        {
+            return;
+        }
+
+        Button button = buttonRect.GetComponent<Button>();
+        if (button == null)
+        {
+            return;
+        }
+
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(action);
     }
 
     private static T FindInScene<T>(Scene scene) where T : Component

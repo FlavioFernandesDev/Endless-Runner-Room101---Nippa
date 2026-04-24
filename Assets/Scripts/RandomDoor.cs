@@ -24,6 +24,7 @@ public class RandomDoor : MonoBehaviour
     private Coroutine _animationCoroutine;
     private bool _isOpen;
     private bool _isAnimating;
+    private bool _initialized;
     private RunManager _runManager;
 
     public bool IsOpen => _isOpen;
@@ -31,6 +32,17 @@ public class RandomDoor : MonoBehaviour
 
     void Start()
     {
+        InitializeRuntimeState();
+    }
+
+    private void InitializeRuntimeState()
+    {
+        if (_initialized)
+        {
+            return;
+        }
+
+        _initialized = true;
         closedRot = transform.localRotation;
         openRot = Quaternion.Euler(transform.localEulerAngles.x, transform.localEulerAngles.y + openAngle, transform.localEulerAngles.z);
         _runManager = RunManager.Instance;
@@ -70,6 +82,22 @@ public class RandomDoor : MonoBehaviour
     public void SetPlayer(Transform playerTransform)
     {
         player = playerTransform;
+    }
+
+    public void ResetRuntimeState()
+    {
+        InitializeRuntimeState();
+
+        if (_animationCoroutine != null)
+        {
+            StopCoroutine(_animationCoroutine);
+            _animationCoroutine = null;
+        }
+
+        jaTentouAbrir = false;
+        _isOpen = false;
+        _isAnimating = false;
+        transform.localRotation = closedRot;
     }
 
     void TentarAbrirPorta()

@@ -15,12 +15,12 @@ public class CollisionDetect : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (_hasTriggered || !other.CompareTag(triggeringTag))
+        if (_hasTriggered || RunManager.Instance.IsGameOver || !other.CompareTag(triggeringTag))
         {
             return;
         }
 
-        if (SceneManager.GetActiveScene().name != RunManager.GameplaySceneName)
+        if (!RunManager.Instance.IsGameplaySceneActive())
         {
             return;
         }
@@ -81,14 +81,7 @@ public class CollisionDetect : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(2);
-        if (fadeOut != null)
-        {
-            fadeOut.SetActive(true);
-        }
-
-        yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(RunManager.StageSelectSceneName);
+        yield return GameOverTransition.Play(fadeOut);
     }
 
 }

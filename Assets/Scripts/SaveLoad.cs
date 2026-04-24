@@ -4,7 +4,7 @@ using UnityEngine;
 public class SaveLoad : MonoBehaviour
 {
     public static int loadedCoins => RunManager.Instance.TotalCoins;
-    public static int loadedKeys => RunManager.Instance.CurrentKeys;
+    public static int loadedKeys => RunManager.Instance.TotalKeys;
     public static int loadedDistance => RunManager.Instance.TotalDistance;
 
     [SerializeField] TMP_Text coinDisplay;
@@ -33,7 +33,7 @@ public class SaveLoad : MonoBehaviour
         }
 
         internalCoin = RunManager.Instance.TotalCoins;
-        internalKey = RunManager.Instance.CurrentKeys;
+        internalKey = RunManager.Instance.TotalKeys;
         internalDistance = RunManager.Instance.TotalDistance;
 
         if (coinDisplay != null)

@@ -35,6 +35,13 @@ public class SegmentCollectibleSpawner : MonoBehaviour
 
     private Transform _runtimeContainer;
     private int _lastZigZagLane = -1;
+    private readonly List<int> _safeLanes = new List<int>();
+    private readonly List<int> _candidateRows = new List<int>();
+    private readonly List<int> _coinRows = new List<int>();
+    private readonly List<int> _availableRows = new List<int>();
+    private readonly List<int> _orderedSafeLanes = new List<int>();
+    private readonly List<int> _targetLanes = new List<int>();
+    private readonly List<CoinPattern> _availablePatterns = new List<CoinPattern>();
 
     public void ApplyDefaultSetup(GameObject newCoinPrefab, GameObject newKeyPrefab)
     {
@@ -73,14 +80,14 @@ public class SegmentCollectibleSpawner : MonoBehaviour
             return;
         }
 
-        List<int> safeLanes = GetSafeLanes(blockedLanes);
-        if (safeLanes.Count == 0)
+        PopulateSafeLanes(blockedLanes);
+        if (_safeLanes.Count == 0)
         {
             return;
         }
 
-        List<int> candidateRows = GetCandidateRows();
-        if (candidateRows.Count == 0)
+        PopulateCandidateRows();
+        if (_candidateRows.Count == 0)
         {
             return;
         }
@@ -90,16 +97,19 @@ public class SegmentCollectibleSpawner : MonoBehaviour
 
         _lastZigZagLane = -1;
 
-        int desiredCoinRows = Mathf.Min(Random.Range(minCoinRows, maxCoinRows + 1), candidateRows.Count);
-        List<int> shuffledRows = Shuffle(candidateRows);
-        List<int> coinRows = shuffledRows.GetRange(0, desiredCoinRows);
-        coinRows.Sort((left, right) => rowOffsets[left].CompareTo(rowOffsets[right]));
-
-        HashSet<int> occupiedRows = new HashSet<int>();
-        foreach (int rowIndex in coinRows)
+        int desiredCoinRows = Mathf.Min(Random.Range(minCoinRows, maxCoinRows + 1), _candidateRows.Count);
+        ShuffleInPlace(_candidateRows);
+        _coinRows.Clear();
+        for (int i = 0; i < desiredCoinRows; i++)
         {
-            SpawnCoinRow(lanePoints, safeLanes, clearLaneIndex, rowIndex, container);
-            occupiedRows.Add(rowIndex);
+            _coinRows.Add(_candidateRows[i]);
+        }
+
+        _coinRows.Sort((left, right) => rowOffsets[left].CompareTo(rowOffsets[right]));
+
+        foreach (int rowIndex in _coinRows)
+        {
+            SpawnCoinRow(lanePoints, _safeLanes, clearLaneIndex, rowIndex, container);
         }
 
         if (keyPrefab == null)
@@ -113,13 +123,13 @@ public class SegmentCollectibleSpawner : MonoBehaviour
             return;
         }
 
-        if (!limitToOneKeyPerSegment && safeLanes.Count > 0)
+        if (limitToOneKeyPerSegment)
         {
-            SpawnKey(lanePoints, safeLanes, clearLaneIndex, candidateRows, coinRows, container);
+            SpawnKey(lanePoints, _safeLanes, clearLaneIndex, _candidateRows, _coinRows, container);
             return;
         }
 
-        SpawnKey(lanePoints, safeLanes, clearLaneIndex, candidateRows, coinRows, container);
+        SpawnKey(lanePoints, _safeLanes, clearLaneIndex, _candidateRows, _coinRows, container);
     }
 
     private void SpawnCoinRow(Transform[] lanePoints, List<int> safeLanes, int clearLaneIndex, int rowIndex, Transform container)
@@ -146,21 +156,21 @@ public class SegmentCollectibleSpawner : MonoBehaviour
         List<int> coinRows,
         Transform container)
     {
-        List<int> availableRows = new List<int>();
+        _availableRows.Clear();
         foreach (int rowIndex in candidateRows)
         {
             if (!coinRows.Contains(rowIndex))
             {
-                availableRows.Add(rowIndex);
+                _availableRows.Add(rowIndex);
             }
         }
 
-        if (availableRows.Count == 0)
+        if (_availableRows.Count == 0)
         {
             return;
         }
 
-        int rowToUse = GetMostReadableKeyRow(availableRows, coinRows);
+        int rowToUse = GetMostReadableKeyRow(_availableRows, coinRows);
         int laneToUse = ChoosePreferredLane(safeLanes, clearLaneIndex, -1);
         SpawnPrefab(keyPrefab, lanePoints[laneToUse], rowOffsets[rowToUse], keyLocalOffset, container);
     }
@@ -169,41 +179,42 @@ public class SegmentCollectibleSpawner : MonoBehaviour
     {
         List<CoinPattern> patterns = GetAvailablePatterns(safeLanes.Count);
         CoinPattern selectedPattern = patterns[Random.Range(0, patterns.Count)];
+        _targetLanes.Clear();
 
         switch (selectedPattern)
         {
             case CoinPattern.ZigZag:
-                return new List<int> { ChooseZigZagLane(safeLanes, clearLaneIndex) };
+                _targetLanes.Add(ChooseZigZagLane(safeLanes, clearLaneIndex));
+                return _targetLanes;
             case CoinPattern.DoubleLane:
                 return GetDoubleLaneSelection(safeLanes, clearLaneIndex);
             case CoinPattern.AllSafeLanes:
                 return OrderLanesByPriority(safeLanes, clearLaneIndex);
             default:
                 _lastZigZagLane = -1;
-                return new List<int> { ChoosePreferredLane(safeLanes, clearLaneIndex, -1) };
+                _targetLanes.Add(ChoosePreferredLane(safeLanes, clearLaneIndex, -1));
+                return _targetLanes;
         }
     }
 
     private List<CoinPattern> GetAvailablePatterns(int safeLaneCount)
     {
-        List<CoinPattern> patterns = new List<CoinPattern>
-        {
-            CoinPattern.SingleLane,
-            CoinPattern.SingleLane
-        };
+        _availablePatterns.Clear();
+        _availablePatterns.Add(CoinPattern.SingleLane);
+        _availablePatterns.Add(CoinPattern.SingleLane);
 
         if (safeLaneCount >= 2)
         {
-            patterns.Add(CoinPattern.ZigZag);
-            patterns.Add(CoinPattern.DoubleLane);
+            _availablePatterns.Add(CoinPattern.ZigZag);
+            _availablePatterns.Add(CoinPattern.DoubleLane);
         }
 
         if (safeLaneCount >= 3)
         {
-            patterns.Add(CoinPattern.AllSafeLanes);
+            _availablePatterns.Add(CoinPattern.AllSafeLanes);
         }
 
-        return patterns;
+        return _availablePatterns;
     }
 
     private int ChooseZigZagLane(List<int> safeLanes, int clearLaneIndex)
@@ -225,15 +236,16 @@ public class SegmentCollectibleSpawner : MonoBehaviour
     private List<int> GetDoubleLaneSelection(List<int> safeLanes, int clearLaneIndex)
     {
         List<int> orderedSafeLanes = OrderLanesByPriority(safeLanes, clearLaneIndex);
-        List<int> result = new List<int> { orderedSafeLanes[0] };
+        _targetLanes.Clear();
+        _targetLanes.Add(orderedSafeLanes[0]);
 
         if (orderedSafeLanes.Count > 1)
         {
-            result.Add(orderedSafeLanes[1]);
+            _targetLanes.Add(orderedSafeLanes[1]);
         }
 
         _lastZigZagLane = -1;
-        return result;
+        return _targetLanes;
     }
 
     private int ChoosePreferredLane(List<int> safeLanes, int clearLaneIndex, int excludedLane)
@@ -252,8 +264,9 @@ public class SegmentCollectibleSpawner : MonoBehaviour
 
     private List<int> OrderLanesByPriority(List<int> safeLanes, int clearLaneIndex)
     {
-        List<int> orderedSafeLanes = new List<int>(safeLanes);
-        orderedSafeLanes.Sort((left, right) =>
+        _orderedSafeLanes.Clear();
+        _orderedSafeLanes.AddRange(safeLanes);
+        _orderedSafeLanes.Sort((left, right) =>
         {
             bool leftIsClear = left == clearLaneIndex;
             bool rightIsClear = right == clearLaneIndex;
@@ -271,7 +284,7 @@ public class SegmentCollectibleSpawner : MonoBehaviour
             return left.CompareTo(right);
         });
 
-        return orderedSafeLanes;
+        return _orderedSafeLanes;
     }
 
     private int GetMostReadableKeyRow(List<int> availableRows, List<int> coinRows)
@@ -341,6 +354,7 @@ public class SegmentCollectibleSpawner : MonoBehaviour
             GameObject child = container.GetChild(i).gameObject;
             if (Application.isPlaying)
             {
+                child.SetActive(false);
                 Destroy(child);
             }
             else
@@ -350,48 +364,41 @@ public class SegmentCollectibleSpawner : MonoBehaviour
         }
     }
 
-    private List<int> GetSafeLanes(bool[] blockedLanes)
+    private void PopulateSafeLanes(bool[] blockedLanes)
     {
-        List<int> safeLanes = new List<int>();
+        _safeLanes.Clear();
         for (int i = 0; i < blockedLanes.Length; i++)
         {
             if (!blockedLanes[i])
             {
-                safeLanes.Add(i);
+                _safeLanes.Add(i);
             }
         }
-
-        return safeLanes;
     }
 
-    private List<int> GetCandidateRows()
+    private void PopulateCandidateRows()
     {
-        List<int> candidateRows = new List<int>();
+        _candidateRows.Clear();
         if (rowOffsets == null)
         {
-            return candidateRows;
+            return;
         }
 
         for (int i = 0; i < rowOffsets.Length; i++)
         {
-            candidateRows.Add(i);
+            _candidateRows.Add(i);
         }
-
-        return candidateRows;
     }
 
-    private List<int> Shuffle(List<int> source)
+    private void ShuffleInPlace(List<int> source)
     {
-        List<int> shuffled = new List<int>(source);
-        for (int i = 0; i < shuffled.Count; i++)
+        for (int i = 0; i < source.Count; i++)
         {
-            int swapIndex = Random.Range(i, shuffled.Count);
-            int currentValue = shuffled[i];
-            shuffled[i] = shuffled[swapIndex];
-            shuffled[swapIndex] = currentValue;
+            int swapIndex = Random.Range(i, source.Count);
+            int currentValue = source[i];
+            source[i] = source[swapIndex];
+            source[swapIndex] = currentValue;
         }
-
-        return shuffled;
     }
 
     private void EnsureDefaults()

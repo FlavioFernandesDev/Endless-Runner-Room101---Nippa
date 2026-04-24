@@ -65,7 +65,7 @@ public static class SettingsMenuSetupTool
 
         SetupLocalizedText(startButton.GetComponentInChildren<TMP_Text>(true), "menu.start");
         SetupLocalizedText(quitButton.GetComponentInChildren<TMP_Text>(true), "menu.quit");
-        SetupLocalizedText(promptText, "menu.game_over_prompt");
+        SetupLocalizedText(promptText, "menu.start_prompt");
 
         GameObject settingsButton = FindChildRecursive(menuButtonsRoot, "SettingsButton")?.gameObject;
         if (settingsButton == null)

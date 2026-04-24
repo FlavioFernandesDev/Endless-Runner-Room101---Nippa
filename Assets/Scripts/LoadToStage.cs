@@ -20,6 +20,6 @@ public class LoadToStage : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(RunManager.GameplaySceneName);
+        SceneManager.LoadScene(RunManager.Instance.SelectedGameplaySceneName);
     }
 }

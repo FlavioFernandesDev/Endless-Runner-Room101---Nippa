@@ -130,5 +130,17 @@ public static class SettingsManager
         AudioListener.volume = MasterVolume;
         Screen.fullScreen = Fullscreen;
         QualitySettings.SetQualityLevel(QualityLevel, true);
+        ApplyFramePacing();
+    }
+
+    private static void ApplyFramePacing()
+    {
+#if UNITY_STANDALONE || UNITY_EDITOR
+        QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = 60;
+#else
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+#endif
     }
 }
