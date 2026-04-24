@@ -1,12 +1,20 @@
 using System;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine;
 
 public static class SettingsManager
 {
+    public const int LowQualityPreset = 0;
+    public const int MediumQualityPreset = 1;
+    public const int HighQualityPreset = 2;
+    public const int QualityPresetCount = 3;
+
     private const string MasterVolumeKey = "SETTINGS_MASTER_VOLUME";
     private const string LanguageKey = "SETTINGS_LANGUAGE";
     private const string FullscreenKey = "SETTINGS_FULLSCREEN";
     private const string QualityKey = "SETTINGS_QUALITY";
+    private const int DefaultQualityPreset = MediumQualityPreset;
 
     private static bool _loaded;
 
@@ -76,29 +84,21 @@ public static class SettingsManager
     public static void SetQuality(int qualityLevel)
     {
         LoadAndApply();
-        int[] qualityLevels = GetAvailableQualityLevels();
-        if (qualityLevels.Length == 0)
-        {
-            return;
-        }
-
-        int clampedIndex = Mathf.Clamp(qualityLevel, 0, qualityLevels.Length - 1);
-        QualityLevel = qualityLevels[clampedIndex];
-        QualitySettings.SetQualityLevel(QualityLevel, true);
+        QualityLevel = ClampQualityPreset(qualityLevel);
+        ApplyQualityPreset();
         PlayerPrefs.SetInt(QualityKey, QualityLevel);
         PlayerPrefs.Save();
     }
 
-    public static int[] GetAvailableQualityLevels()
+    public static int[] GetAvailableQualityPresets()
     {
-        int qualityCount = QualitySettings.names.Length;
-        int[] qualityLevels = new int[qualityCount];
-        for (int i = 0; i < qualityCount; i++)
+        int[] qualityPresets = new int[QualityPresetCount];
+        for (int i = 0; i < qualityPresets.Length; i++)
         {
-            qualityLevels[i] = i;
+            qualityPresets[i] = i;
         }
 
-        return qualityLevels;
+        return qualityPresets;
     }
 
     private static AppLanguage LoadLanguage()
@@ -114,23 +114,98 @@ public static class SettingsManager
 
     private static int LoadQualityLevel()
     {
-        int currentQuality = QualitySettings.GetQualityLevel();
-        int qualityLevel = PlayerPrefs.GetInt(QualityKey, currentQuality);
-        int[] availableLevels = GetAvailableQualityLevels();
-        if (availableLevels.Length == 0)
-        {
-            return 0;
-        }
-
-        return Mathf.Clamp(qualityLevel, 0, availableLevels.Length - 1);
+        int qualityLevel = PlayerPrefs.GetInt(QualityKey, DefaultQualityPreset);
+        return ClampQualityPreset(qualityLevel);
     }
 
     private static void ApplyAll()
     {
         AudioListener.volume = MasterVolume;
         Screen.fullScreen = Fullscreen;
-        QualitySettings.SetQualityLevel(QualityLevel, true);
+        ApplyQualityPreset();
         ApplyFramePacing();
+    }
+
+    private static int ClampQualityPreset(int qualityLevel)
+    {
+        return Mathf.Clamp(qualityLevel, LowQualityPreset, HighQualityPreset);
+    }
+
+    private static void ApplyQualityPreset()
+    {
+        QualityPreset preset = GetQualityPreset(QualityLevel);
+        ApplyClosestUnityQualityLevel();
+
+        QualitySettings.lodBias = preset.LodBias;
+        QualitySettings.shadowDistance = preset.ShadowDistance;
+        QualitySettings.antiAliasing = preset.MsaaSamples;
+        QualitySettings.globalTextureMipmapLimit = preset.TextureMipmapLimit;
+        QualitySettings.shadows = preset.Shadows;
+        QualitySettings.shadowResolution = preset.ShadowResolution;
+
+        ApplyUrpQuality(preset);
+    }
+
+    private static void ApplyClosestUnityQualityLevel()
+    {
+        int qualityCount = QualitySettings.names.Length;
+        if (qualityCount == 0)
+        {
+            return;
+        }
+
+        int unityQualityLevel = Mathf.Clamp(QualityLevel, 0, qualityCount - 1);
+        QualitySettings.SetQualityLevel(unityQualityLevel, true);
+    }
+
+    private static void ApplyUrpQuality(QualityPreset preset)
+    {
+        RenderPipelineAsset renderPipelineAsset = QualitySettings.renderPipeline;
+        if (renderPipelineAsset == null)
+        {
+            renderPipelineAsset = GraphicsSettings.currentRenderPipeline;
+        }
+
+        if (renderPipelineAsset is not UniversalRenderPipelineAsset urpAsset)
+        {
+            return;
+        }
+
+        urpAsset.renderScale = preset.RenderScale;
+        urpAsset.msaaSampleCount = preset.MsaaSamples;
+        urpAsset.shadowDistance = preset.ShadowDistance;
+    }
+
+    private static QualityPreset GetQualityPreset(int qualityLevel)
+    {
+        return ClampQualityPreset(qualityLevel) switch
+        {
+            LowQualityPreset => new QualityPreset(0.75f, 0.75f, 18f, 1, 1, UnityEngine.ShadowQuality.Disable, UnityEngine.ShadowResolution.Low),
+            HighQualityPreset => new QualityPreset(1f, 2f, 35f, 4, 0, UnityEngine.ShadowQuality.All, UnityEngine.ShadowResolution.High),
+            _ => new QualityPreset(0.9f, 1f, 25f, 1, 0, UnityEngine.ShadowQuality.HardOnly, UnityEngine.ShadowResolution.Medium)
+        };
+    }
+
+    private readonly struct QualityPreset
+    {
+        public QualityPreset(float renderScale, float lodBias, float shadowDistance, int msaaSamples, int textureMipmapLimit, UnityEngine.ShadowQuality shadows, UnityEngine.ShadowResolution shadowResolution)
+        {
+            RenderScale = renderScale;
+            LodBias = lodBias;
+            ShadowDistance = shadowDistance;
+            MsaaSamples = msaaSamples;
+            TextureMipmapLimit = textureMipmapLimit;
+            Shadows = shadows;
+            ShadowResolution = shadowResolution;
+        }
+
+        public float RenderScale { get; }
+        public float LodBias { get; }
+        public float ShadowDistance { get; }
+        public int MsaaSamples { get; }
+        public int TextureMipmapLimit { get; }
+        public UnityEngine.ShadowQuality Shadows { get; }
+        public UnityEngine.ShadowResolution ShadowResolution { get; }
     }
 
     private static void ApplyFramePacing()
