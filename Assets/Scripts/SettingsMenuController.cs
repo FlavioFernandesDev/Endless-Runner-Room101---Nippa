@@ -19,6 +19,16 @@ public sealed class SettingsMenuController : MonoBehaviour
         SettingsManager.LoadAndApply();
     }
 
+    private void OnEnable()
+    {
+        SettingsManager.LanguageChanged += RefreshQualityOptions;
+    }
+
+    private void OnDisable()
+    {
+        SettingsManager.LanguageChanged -= RefreshQualityOptions;
+    }
+
     public void OpenPanel()
     {
         if (!_isInitialized)
@@ -86,15 +96,7 @@ public sealed class SettingsMenuController : MonoBehaviour
         if (qualityDropdown != null)
         {
             qualityDropdown.onValueChanged.RemoveListener(HandleQualityChanged);
-            qualityDropdown.ClearOptions();
-
-            List<string> qualityOptions = new List<string>();
-            foreach (string qualityName in QualitySettings.names)
-            {
-                qualityOptions.Add(qualityName);
-            }
-
-            qualityDropdown.AddOptions(qualityOptions);
+            RefreshQualityOptions();
             qualityDropdown.onValueChanged.AddListener(HandleQualityChanged);
         }
     }
@@ -229,10 +231,33 @@ public sealed class SettingsMenuController : MonoBehaviour
 
         if (qualityDropdown != null)
         {
+            RefreshQualityOptions();
             qualityDropdown.SetValueWithoutNotify(SettingsManager.QualityLevel);
         }
 
         _isUpdatingUi = false;
+    }
+
+    private void RefreshQualityOptions()
+    {
+        if (qualityDropdown == null)
+        {
+            return;
+        }
+
+        int selectedValue = Mathf.Clamp(qualityDropdown.value, SettingsManager.LowQualityPreset, SettingsManager.HighQualityPreset);
+        bool wasUpdatingUi = _isUpdatingUi;
+        _isUpdatingUi = true;
+        qualityDropdown.ClearOptions();
+        qualityDropdown.AddOptions(new List<string>
+        {
+            LocalizationTable.Get("settings.quality.low", SettingsManager.Language),
+            LocalizationTable.Get("settings.quality.medium", SettingsManager.Language),
+            LocalizationTable.Get("settings.quality.high", SettingsManager.Language)
+        });
+        qualityDropdown.SetValueWithoutNotify(Mathf.Clamp(selectedValue, 0, qualityDropdown.options.Count - 1));
+        qualityDropdown.RefreshShownValue();
+        _isUpdatingUi = wasUpdatingUi;
     }
 
     private GameObject CreateSettingsPanel(Transform canvasTransform, Button buttonTemplate)
