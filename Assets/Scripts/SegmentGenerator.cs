@@ -68,7 +68,7 @@ public class SegmentGenerator : MonoBehaviour
         GameObject prefab = segment[segmentNum];
         GameObject newSegment = GetSegmentInstance(prefab, new Vector3(0, 0, zPos), out bool reusedFromPool);
         ConfigureRuntimeReferences(newSegment, reusedFromPool);
-        HauntedLevelStyler.ApplyTo(newSegment);
+        RuntimeSegmentOptimizer.ApplyToSegment(newSegment);
         activeSegments.Add(new ActiveSegment
         {
             Instance = newSegment,
@@ -205,5 +205,7 @@ public class SegmentGenerator : MonoBehaviour
         {
             corridorTile.RegenerateRuntimeContent();
         }
+
+        RuntimeSegmentOptimizer.ApplyToSegment(segmentRoot);
     }
 }

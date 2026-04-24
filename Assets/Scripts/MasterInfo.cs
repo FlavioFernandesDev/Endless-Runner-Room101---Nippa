@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MasterInfo : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class MasterInfo : MonoBehaviour
     private TMP_Text _coinText;
     private TMP_Text _keyText;
     private TMP_Text _runText;
+    private Color _defaultCoinTextColor = Color.black;
+    private Color _defaultKeyTextColor = Color.black;
+    private Color _defaultRunTextColor = Color.black;
+    private bool? _lastHauntedTextState;
     private int _lastCoins = -1;
     private int _lastKeys = -1;
     private int _lastDistance = -1;
@@ -23,21 +28,37 @@ public class MasterInfo : MonoBehaviour
         if (coinDisplay != null)
         {
             _coinText = coinDisplay.GetComponent<TMP_Text>();
+            if (_coinText != null)
+            {
+                _defaultCoinTextColor = _coinText.color;
+            }
         }
 
         if (keyDisplay != null)
         {
             _keyText = keyDisplay.GetComponent<TMP_Text>();
+            if (_keyText != null)
+            {
+                _defaultKeyTextColor = _keyText.color;
+            }
         }
 
         if (runDisplay != null)
         {
             _runText = runDisplay.GetComponent<TMP_Text>();
+            if (_runText != null)
+            {
+                _defaultRunTextColor = _runText.color;
+            }
         }
+
+        ApplySceneTextColorIfNeeded();
     }
 
     void Update()
     {
+        ApplySceneTextColorIfNeeded();
+
         int coins = RunManager.Instance.CurrentCoins;
         int keys = RunManager.Instance.CurrentKeys;
         int distance = RunManager.Instance.CurrentDistance;
@@ -60,6 +81,28 @@ public class MasterInfo : MonoBehaviour
         {
             _runText.text = distance.ToString();
             _lastDistance = distance;
+        }
+    }
+
+    private void ApplySceneTextColorIfNeeded()
+    {
+        bool isHauntedGameplay = SceneManager.GetActiveScene().name == RunManager.HauntedGameplaySceneName;
+        if (_lastHauntedTextState == isHauntedGameplay)
+        {
+            return;
+        }
+
+        _lastHauntedTextState = isHauntedGameplay;
+        SetTextColor(_coinText, isHauntedGameplay ? Color.white : _defaultCoinTextColor);
+        SetTextColor(_keyText, isHauntedGameplay ? Color.white : _defaultKeyTextColor);
+        SetTextColor(_runText, isHauntedGameplay ? Color.white : _defaultRunTextColor);
+    }
+
+    private static void SetTextColor(TMP_Text text, Color color)
+    {
+        if (text != null)
+        {
+            text.color = color;
         }
     }
 }

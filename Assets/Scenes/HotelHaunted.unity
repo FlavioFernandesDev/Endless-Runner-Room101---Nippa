@@ -523,13 +523,20 @@ MonoBehaviour:
   playerSpeed: 2
   maxSpeed: 15
   acceleration: 0.2
-  horizontalSpeed: 3
+  laneChangeSpeed: 10
   jumpForce: 5
   minX: -2
   maxX: 1.7
+  groundedRayDistance: 1.2
+  inputDeadzone: 0.5
+  deathReturnDelay: 1.5
+  protectedHitSpeedMultiplier: 0.6
+  protectedHitDuration: 0.5
+  protectedDoorGraceDuration: 0.6
   isRunning: 0
   isGrounded: 0
   isDead: 0
+  currentLane: 1
   _animator: {fileID: 1821384673}
   painelBotoesMenu: {fileID: 0}
 --- !u!114 &309765503
@@ -1038,7 +1045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.39607844}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39607844}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1581,7 +1588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.39607844}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39607844}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2047,6 +2054,13 @@ MonoBehaviour:
   player: {fileID: 309765501}
   zPos: 30
   segmentNum: 0
+  initialSegmentCount: 4
+  maxActiveSegments: 4
+  prewarmSegmentCount: 5
+  spawnBatchLimitPerFrame: 1
+  useSegmentPooling: 1
+  spawnTriggerDistance: 90
+  fallbackSegmentLength: 30
 --- !u!4 &1318841905
 Transform:
   m_ObjectHideFlags: 0
@@ -3801,7 +3815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.39607844}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39607844}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

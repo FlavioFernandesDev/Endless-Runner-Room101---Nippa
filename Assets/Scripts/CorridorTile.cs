@@ -21,11 +21,13 @@ public class CorridorTile : MonoBehaviour
 
     private SegmentCollectibleSpawner _collectibleSpawner;
     private Transform _runtimeSpawnContainer;
+    private RuntimePrefabPool _runtimePrefabPool;
     private const string RuntimeSpawnContainerName = "RuntimeTileSpawns";
 
     private void Awake()
     {
         _collectibleSpawner = GetComponent<SegmentCollectibleSpawner>();
+        _runtimePrefabPool = RuntimePrefabPool.GetOrCreate(gameObject);
     }
 
     private void Start()
@@ -38,6 +40,7 @@ public class CorridorTile : MonoBehaviour
         ClearRuntimeSpawnContainer();
         SpawnObstaclesAndCollectibles();
         SpawnDecorations();
+        RuntimeSegmentOptimizer.ApplyToSegment(gameObject);
         HauntedLevelStyler.ApplyTo(gameObject);
     }
 
@@ -102,7 +105,7 @@ public class CorridorTile : MonoBehaviour
             if (point != null && Random.value > 0.6f)
             {
                 GameObject prefab = wallDecorPrefabs[Random.Range(0, wallDecorPrefabs.Length)];
-                Instantiate(prefab, point.position, point.rotation, GetOrCreateRuntimeSpawnContainer());
+                SpawnRuntimePrefab(prefab, point.position, point.rotation, GetOrCreateRuntimeSpawnContainer());
             }
         }
     }
@@ -121,8 +124,19 @@ public class CorridorTile : MonoBehaviour
         }
 
         GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
-        Instantiate(prefab, lanePoint.position, lanePoint.rotation, GetOrCreateRuntimeSpawnContainer());
+        SpawnRuntimePrefab(prefab, lanePoint.position, lanePoint.rotation, GetOrCreateRuntimeSpawnContainer());
         return true;
+    }
+
+    private void SpawnRuntimePrefab(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
+    {
+        if (Application.isPlaying && _runtimePrefabPool != null)
+        {
+            _runtimePrefabPool.Get(prefab, position, rotation, parent);
+            return;
+        }
+
+        Instantiate(prefab, position, rotation, parent);
     }
 
     private Transform GetOrCreateRuntimeSpawnContainer()
@@ -153,8 +167,15 @@ public class CorridorTile : MonoBehaviour
             GameObject child = container.GetChild(i).gameObject;
             if (Application.isPlaying)
             {
-                child.SetActive(false);
-                Destroy(child);
+                if (_runtimePrefabPool != null)
+                {
+                    _runtimePrefabPool.Release(child);
+                }
+                else
+                {
+                    child.SetActive(false);
+                    Destroy(child);
+                }
             }
             else
             {

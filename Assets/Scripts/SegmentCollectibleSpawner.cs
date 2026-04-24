@@ -34,6 +34,7 @@ public class SegmentCollectibleSpawner : MonoBehaviour
     [SerializeField] private string runtimeContainerName = "RuntimeCollectibles";
 
     private Transform _runtimeContainer;
+    private RuntimePrefabPool _runtimePrefabPool;
     private int _lastZigZagLane = -1;
     private readonly List<int> _safeLanes = new List<int>();
     private readonly List<int> _candidateRows = new List<int>();
@@ -42,6 +43,11 @@ public class SegmentCollectibleSpawner : MonoBehaviour
     private readonly List<int> _orderedSafeLanes = new List<int>();
     private readonly List<int> _targetLanes = new List<int>();
     private readonly List<CoinPattern> _availablePatterns = new List<CoinPattern>();
+
+    private void Awake()
+    {
+        _runtimePrefabPool = RuntimePrefabPool.GetOrCreate(gameObject);
+    }
 
     public void ApplyDefaultSetup(GameObject newCoinPrefab, GameObject newKeyPrefab)
     {
@@ -324,6 +330,12 @@ public class SegmentCollectibleSpawner : MonoBehaviour
         }
 
         Vector3 spawnPosition = lanePoint.position + new Vector3(localOffset.x, localOffset.y, rowOffset + localOffset.z);
+        if (Application.isPlaying && _runtimePrefabPool != null)
+        {
+            _runtimePrefabPool.Get(prefab, spawnPosition, prefab.transform.rotation, container);
+            return;
+        }
+
         Instantiate(prefab, spawnPosition, prefab.transform.rotation, container);
     }
 
@@ -354,8 +366,15 @@ public class SegmentCollectibleSpawner : MonoBehaviour
             GameObject child = container.GetChild(i).gameObject;
             if (Application.isPlaying)
             {
-                child.SetActive(false);
-                Destroy(child);
+                if (_runtimePrefabPool != null)
+                {
+                    _runtimePrefabPool.Release(child);
+                }
+                else
+                {
+                    child.SetActive(false);
+                    Destroy(child);
+                }
             }
             else
             {
