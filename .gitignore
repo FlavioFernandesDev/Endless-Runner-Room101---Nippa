@@ -73,3 +73,22 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Unity AI Toolkit / generated assets caches
+/[Gg]enerated[Aa]ssets/
+/[Aa]ssets/AI Toolkit/[Tt]emp/
+/[Aa]ssets/AI Toolkit/[Tt]emp.meta
+
+# Unity scene recovery folder
+/[Aa]ssets/_[Rr]ecovery/
+/[Aa]ssets/_[Rr]ecovery.meta
+
+# macOS
+.DS_Store
+
+# VS/Rider workspace files (extra to the *.sln already covered)
+.vsconfig
+*.slnx
+
+# Local tooling / MCP helpers
+/scripts/
