@@ -128,7 +128,7 @@ A implementação foca-se nos tópicos de avaliação da secção 6 do enunciado
 
 ### UI e UX
 - `TextMeshPro` para todos os textos.
-- **Localização** própria com `AppLanguage` + `LocalizedText` (múltiplas linguagens — Português / Inglês) — item extra valorizado.
+- **Localização** própria com `AppLanguage` + `LocalizedText` (múltiplas linguagens — Português / Inglês).
 - Menus: Main Menu, Settings, Stage Select, Information, Achievements, Pause, Game Over.
 
 ### Achievements
@@ -159,7 +159,7 @@ A implementação foca-se nos tópicos de avaliação da secção 6 do enunciado
 
 ## 8. Pontos extra implementados
 
-O enunciado valoriza os seguintes pontos, todos contemplados:
+Implementamos os seguintes pontos de forma a cumprir com os pontos extra do documento fornecido pelo professor:
 
 - Múltiplos níveis / cenas — `HotelCorridor1` e `HotelHaunted` com estilos distintos.
 - Dificuldade incremental — aumento progressivo da velocidade.
@@ -174,7 +174,7 @@ O enunciado valoriza os seguintes pontos, todos contemplados:
 
 ## 9. Dificuldades enfrentadas durante o desenvolvimento
 
-- **Perda de cena e de progresso** logo no início, por desconhecimento de que o Unity **não guarda a cena automaticamente**. Obrigou a recomeçar o projeto do zero e a adotar a regra de guardar manualmente antes de cada commit. Aproveitámos para atualizar o motor, pensando (erradamente) que o problema era de versão.
+- **Perda de cena e de progresso** logo numa fase incial, por desconhecimento de que o Unity **não guarda a cena automaticamente**. Obrigou a recomeçar o projeto do zero e a adotar a regra de guardar manualmente antes de cada commit. Aproveitámos para atualizar o motor, pensando (erradamente) que o problema era de versão.
 - **Configuração de componentes Unity** — colisões e triggers a não dispararem por razões subtis: tag `Obstacle` em falta, `Rigidbody` a faltar num dos objetos da colisão, `Collider` sem *Is Trigger* marcado quando devia, ou o oposto. Grande parte do tempo de *debug* foi em inspecionar o estado dos componentes no Inspector.
 - **Performance num endless runner** — manter FPS estável com geração contínua de corredores. Resolvido com *object pooling* (`RuntimePrefabPool`) e optimização de segmentos fora de vista (`RuntimeSegmentOptimizer`). A afinação final desta parte, assim como a implementação do sistema de **achievements**, foram feitas com apoio de ferramentas de IA (GitHub Copilot / Claude) já sobre a estrutura definida por nós.
 - **Aprendizagem inicial do Unity** — baseámos a estrutura de partida no tutorial <https://www.youtube.com/watch?v=ufDO-IGv8L8> e adaptámos a ideia para o tema "porteiro de hotel" com a nossa própria arte, mecânicas (chaves, portas aleatórias, variante haunted) e arquitetura de cenas.
